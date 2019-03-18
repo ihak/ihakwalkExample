@@ -14,41 +14,29 @@ class WalkVC: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        let bgView = WalkBGView(image: UIImage(named: "bg_03")!)
+        bgView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(bgView)
         
-        let imageView = UIImageView(image: UIImage(named: "bg_03"))
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleAspectFill
-        self.view.addSubview(imageView)
-        
-        imageView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
-        imageView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
-        imageView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
-        imageView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
-        
-        self.view.setNeedsLayout()
-        self.view.layoutIfNeeded()
-        blur()
-//        addWalkView()
-        
-        let view = UIView(frame: self.view.safeAreaLayoutGuide.layoutFrame)
-        view.layer.borderColor = UIColor.white.cgColor
-        view.layer.borderWidth = 1.0
-        self.view.addSubview(view)
-
+        bgView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
+        bgView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+        bgView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
+        bgView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+        bgView.addBlur(style: .dark)
     }
     
-    override func viewDidLayoutSubviews() {
-        // For each layout guide object in the view
-        // Add a layer with the same frame with a border
-        // to make layout guide visible
-        for guide in self.view.layoutGuides {
-            print(guide.layoutFrame)
-            let view = UIView(frame: guide.layoutFrame)
-            view.layer.borderColor = UIColor.white.cgColor
-            view.layer.borderWidth = 1.0
-            self.view.addSubview(view)
-        }
-    }
+//    override func viewDidLayoutSubviews() {
+//        // For each layout guide object in the view
+//        // Add a layer with the same frame with a border
+//        // to make layout guide visible
+//        for guide in self.view.layoutGuides {
+//            print(guide.layoutFrame)
+//            let view = UIView(frame: guide.layoutFrame)
+//            view.layer.borderColor = UIColor.white.cgColor
+//            view.layer.borderWidth = 1.0
+//            self.view.addSubview(view)
+//        }
+//    }
     
     func blur() {
         let blurEffect = UIBlurEffect(style: .extraLight)
