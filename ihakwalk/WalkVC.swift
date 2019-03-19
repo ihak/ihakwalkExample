@@ -9,84 +9,62 @@
 import UIKit
 
 class WalkVC: UIViewController {
+    var scrollView: UIScrollView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        let bgView = WalkBGView(image: UIImage(named: "bg_03")!)
-        bgView.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(bgView)
-        
-        bgView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
-        bgView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
-        bgView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
-        bgView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
-        bgView.addBlur(style: .dark)
+        addScrollView()
     }
     
-//    override func viewDidLayoutSubviews() {
-//        // For each layout guide object in the view
-//        // Add a layer with the same frame with a border
-//        // to make layout guide visible
-//        for guide in self.view.layoutGuides {
-//            print(guide.layoutFrame)
-//            let view = UIView(frame: guide.layoutFrame)
-//            view.layer.borderColor = UIColor.white.cgColor
-//            view.layer.borderWidth = 1.0
-//            self.view.addSubview(view)
-//        }
-//    }
-    
-    func blur() {
-        let blurEffect = UIBlurEffect(style: .extraLight)
-        let blur = UIVisualEffectView(effect: blurEffect)
-        blur.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(blur)
+    func addScrollView() {
+        self.scrollView = UIScrollView(frame: .zero)
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.backgroundColor = .purple
+        self.view.addSubview(scrollView)
         
-        blur.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
-        blur.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
-        blur.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
-        blur.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+        scrollView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
+        scrollView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+        scrollView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
+        scrollView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
         
-        let vibrancy = UIVisualEffectView(effect: UIVibrancyEffect(blurEffect: blurEffect))
-        vibrancy.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true
         
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = String(describing: "Hello World")
-        vibrancy.contentView.addSubview(label)
-        vibrancy.addConstraint(NSLayoutConstraint(item: label, attribute: .centerX, relatedBy: .equal, toItem: vibrancy, attribute: .centerX, multiplier: 1.0, constant: 0.0))
-        vibrancy.addConstraint(NSLayoutConstraint(item: label, attribute: .centerY, relatedBy: .equal, toItem: vibrancy, attribute: .centerY, multiplier: 1.0, constant: 0.0))
+        let view = UIView(frame: .zero)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.addSubview(view)
+        view.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
+        view.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
+        view.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
+        view.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true
         
-        blur.contentView.addSubview(vibrancy)
-        vibrancy.topAnchor.constraint(equalTo: blur.topAnchor).isActive = true
-        vibrancy.bottomAnchor.constraint(equalTo: blur.bottomAnchor).isActive = true
-        vibrancy.leadingAnchor.constraint(equalTo: blur.leadingAnchor).isActive = true
-        vibrancy.trailingAnchor.constraint(equalTo: blur.trailingAnchor).isActive = true
+        let milestone1 = WalkView(title: "Title 1", descriptionText: "Some description related to title 1.", image: UIImage(named: "ticket-office"), sequence: [.image, .description, .title])
+        
+        let milestone2 = WalkView(title: "Title 2", descriptionText: "Some description related to title 2.", image: UIImage(named: "title2"), sequence: [.image, .title, .description])
+        addMileStones(views: [milestone1, milestone2], to: view)
     }
-
-    func addWalkView() {
-        let walkView = WalkView(title:"Title", descriptionText: "This is a long description text.", image: UIImage(named:"title2"), sequence:[.title, .image, .description]) { (title, description, image) in
-            description?.textColor = .white
-            description?.numberOfLines = 2
-            description?.font = UIFont.systemFont(ofSize: 20)
-            description?.textAlignment = .center
-            description?.backgroundColor = .blue
+    
+    func addMileStones(views: [UIView], to container:UIView) {
+        var previousView: UIView!
+        for (index, view) in views.enumerated() {
+            view.translatesAutoresizingMaskIntoConstraints = false
+            container.addSubview(view)
+            view.topAnchor.constraint(equalTo: container.topAnchor).isActive = true
+            view.bottomAnchor.constraint(equalTo: container.bottomAnchor).isActive = true
+            view.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width).isActive = true
             
-            title?.textAlignment = .center
-            title?.backgroundColor = .orange
+            if previousView != nil {
+                view.leadingAnchor.constraint(equalTo: previousView.trailingAnchor).isActive = true
+            }
+            else {
+                view.leadingAnchor.constraint(equalTo: container.leadingAnchor).isActive = true
+            }
             
-            image?.backgroundColor = .brown
+            if index == (views.count - 1) {
+                view.trailingAnchor.constraint(equalTo: container.trailingAnchor).isActive = true
+            }
+            previousView = view
         }
-        
-        walkView.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(walkView)
-
-        walkView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
-        walkView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
-        walkView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
-        walkView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
-        
     }
 }
