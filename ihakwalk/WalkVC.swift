@@ -28,7 +28,18 @@ class WalkVC: UIViewController {
         
         let milestone3 = WalkView(title: "Title 3", descriptionText: "Some description related to title 3.", image: UIImage(named: "ticket-office"), sequence: [.image, .title, .description])
         
-        let walkslider = WalkSlider(backgroundView: WalkBGView(image: UIImage(named: "bg_wide")!, type: .paralax), milestones: [milestone1, milestone2, milestone3])
+        let milestone4 = WalkBGView(image: UIImage(named: "12"), walkView: WalkView(title: "Title 4", descriptionText: "Some description related to title 4.", image: UIImage(named: "ticket-office"), sequence: [.image, .description, .title]))
+        
+        let milestone5 = WalkBGView(image: UIImage(named: "11"), walkView: WalkView(title: "Title 5", descriptionText: "Some description related to title 5.", image: UIImage(named: "title2"), sequence: [.image, .title, .description]))
+        
+        let milestone6 = WalkBGView(image: UIImage(named: "10"), walkView: WalkView(title: "Title 6", descriptionText: "Some description related to title 6.", image: UIImage(named: "ticket-office"), sequence: [.image, .title, .description]))
+
+        let walkslider = WalkSlider(milestones: [WalkBGView(image: UIImage(named: "15"), walkView: milestone1),
+                                                 WalkBGView(image: UIImage(named: "14"), walkView: milestone2),
+                                                 WalkBGView(image: UIImage(named: "13"), walkView: milestone3),
+                                                 milestone4,
+                                                 milestone5,
+                                                 milestone6])
         walkslider.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(walkslider)
         

@@ -13,7 +13,7 @@ class WalkBGView: UIView {
         case normal, paralax
     }
     
-    var imageView: UIImageView
+    var imageView: UIImageView?
     var walkView: WalkView?
     var leadingConstraint: NSLayoutConstraint!
     
@@ -22,7 +22,9 @@ class WalkBGView: UIView {
     var contentSize = 0.0
     var paralaxWidth = 0.0
     
-    var initialOffset = 50.0
+    var initialOffset: Double {
+        return type == .normal ? 0.0: 50.0
+    }
     
     var paralaxDelta = 0.5
     
@@ -39,13 +41,16 @@ class WalkBGView: UIView {
         }
     }
     
-    init(image: UIImage, walkView: WalkView? = nil, type: BackgroundType = .normal) {
-        self.imageView = UIImageView(image: image)
-        self.paralaxWidth = Double(image.size.width)
+    init(image: UIImage? = nil, walkView: WalkView? = nil, type: BackgroundType = .normal) {
+        if let image = image {
+            self.imageView = UIImageView(image: image)
+            self.paralaxWidth = Double(image.size.width)
+        }
         self.walkView = walkView
         self.type = type
+
         super.init(frame: .zero)
-        
+        self.clipsToBounds = true
         setup()
     }
     
@@ -54,18 +59,20 @@ class WalkBGView: UIView {
     }
     
     func setup() {
-        self.addSubview(imageView)
-        imageView.contentMode = .scaleAspectFill
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        
-        imageView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        imageView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-        self.leadingConstraint =  imageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: CGFloat(self.initialOffset * -1))
-        self.leadingConstraint.isActive = true
-        
-        // if type is normal then bind the image with trailing anchor.
-        if type == .normal {
-            imageView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+        if let imageView = self.imageView {
+            self.addSubview(imageView)
+            imageView.contentMode = .scaleAspectFill
+            imageView.translatesAutoresizingMaskIntoConstraints = false
+            
+            imageView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+            imageView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+            self.leadingConstraint =  imageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: CGFloat(self.initialOffset * -1))
+            self.leadingConstraint.isActive = true
+            
+            // if type is normal then bind the image with trailing anchor.
+            if type == .normal {
+                imageView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+            }
         }
         
         if let walkView = self.walkView {
@@ -83,7 +90,13 @@ class WalkBGView: UIView {
         let blurEffect = UIBlurEffect(style: style)
         let blur = UIVisualEffectView(effect: blurEffect)
         blur.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(blur)
+        
+        if let walk = self.walkView {
+            self.insertSubview(blur, belowSubview: walk)
+        }
+        else if let bg = self.imageView {
+            self.insertSubview(blur, aboveSubview: bg)
+        }
         
         blur.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         blur.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
