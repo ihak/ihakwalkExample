@@ -16,6 +16,7 @@
 		E43C90E8223A7CD300898DF2 /* WalkVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43C90E7223A7CD300898DF2 /* WalkVC.swift */; };
 		E43C90EA223BB38D00898DF2 /* WalkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43C90E9223BB38D00898DF2 /* WalkView.swift */; };
 		E43C90EC223FAE2A00898DF2 /* WalkBGView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43C90EB223FAE2A00898DF2 /* WalkBGView.swift */; };
+		E43C90EE2240B8D200898DF2 /* WalkSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43C90ED2240B8D200898DF2 /* WalkSlider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +43,7 @@
 		E43C90E7223A7CD300898DF2 /* WalkVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkVC.swift; sourceTree = "<group>"; };
 		E43C90E9223BB38D00898DF2 /* WalkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkView.swift; sourceTree = "<group>"; };
 		E43C90EB223FAE2A00898DF2 /* WalkBGView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkBGView.swift; sourceTree = "<group>"; };
+		E43C90ED2240B8D200898DF2 /* WalkSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkSlider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,7 +67,6 @@
 		E43C90BB223A7BF500898DF2 = {
 			isa = PBXGroup;
 			children = (
-				E43C90EB223FAE2A00898DF2 /* WalkBGView.swift */,
 				E43C90C6223A7BF500898DF2 /* ihakwalk */,
 				E43C90DB223A7BF700898DF2 /* ihakwalkTests */,
 				E43C90C5223A7BF500898DF2 /* Products */,
@@ -92,6 +93,8 @@
 				E43C90D3223A7BF700898DF2 /* Info.plist */,
 				E43C90E7223A7CD300898DF2 /* WalkVC.swift */,
 				E43C90E9223BB38D00898DF2 /* WalkView.swift */,
+				E43C90EB223FAE2A00898DF2 /* WalkBGView.swift */,
+				E43C90ED2240B8D200898DF2 /* WalkSlider.swift */,
 			);
 			path = ihakwalk;
 			sourceTree = "<group>";
@@ -209,6 +212,7 @@
 				E43C90CA223A7BF500898DF2 /* ViewController.swift in Sources */,
 				E43C90C8223A7BF500898DF2 /* AppDelegate.swift in Sources */,
 				E43C90E8223A7CD300898DF2 /* WalkVC.swift in Sources */,
+				E43C90EE2240B8D200898DF2 /* WalkSlider.swift in Sources */,
 				E43C90EC223FAE2A00898DF2 /* WalkBGView.swift in Sources */,
 				E43C90EA223BB38D00898DF2 /* WalkView.swift in Sources */,
 			);
@@ -375,11 +379,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Q6H55AY6YP;
 				INFOPLIST_FILE = ihakwalk/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ihakhan.ihakwalk;
+				PRODUCT_BUNDLE_IDENTIFIER = com.arpatech.ihakwalk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -393,11 +398,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Q6H55AY6YP;
 				INFOPLIST_FILE = ihakwalk/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ihakhan.ihakwalk;
+				PRODUCT_BUNDLE_IDENTIFIER = com.arpatech.ihakwalk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
