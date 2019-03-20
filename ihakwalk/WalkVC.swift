@@ -11,13 +11,12 @@ import UIKit
 class WalkVC: UIViewController {
     var scrollView: UIScrollView!
     var currentPage = 0
-    var totalPages = 3
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        addScrollView()
+        addScrollInternalParalax()
     }
     
     func addScrollView() {
@@ -40,6 +39,29 @@ class WalkVC: UIViewController {
                                                  milestone4,
                                                  milestone5,
                                                  milestone6])
+        walkslider.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(walkslider)
+        
+        walkslider.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
+        walkslider.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+        walkslider.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
+        walkslider.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+    }
+    
+    func addScrollInternalParalax() {
+        let milestone1 = WalkView(title: "Title 1", descriptionText: "Some description related to title 1.", image: UIImage(named: "ticket-office"), sequence: [.image, .description, .title])
+        
+        let milestone2 = WalkView(title: "Title 2", descriptionText: "Some description related to title 2.", image: UIImage(named: "title2"), sequence: [.image, .title, .description])
+        
+        let milestone3 = WalkView(title: "Title 3", descriptionText: "Some description related to title 3.", image: UIImage(named: "ticket-office"), sequence: [.image, .title, .description])
+        
+        let milestone4 = WalkBGView(image: UIImage(named: "bg_wide_2"), walkView: WalkView(title: "Title 4", descriptionText: "Some description related to title 4.", image: UIImage(named: "ticket-office"), sequence: [.image, .description, .title]), type: .paralax)
+        milestone4.initialOffset = 300.0
+
+        let walkslider = WalkSlider(milestones: [WalkBGView(image: UIImage(named: "bg_wide_5"), walkView: milestone1, type: .paralax),
+                                                 WalkBGView(image: UIImage(named: "bg_wide_4"), walkView: milestone2, type: .paralax),
+                                                 WalkBGView(image: UIImage(named: "bg_wide_3"), walkView: milestone3, type: .paralax), milestone4])
+        
         walkslider.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(walkslider)
         

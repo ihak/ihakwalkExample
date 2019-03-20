@@ -22,9 +22,7 @@ class WalkBGView: UIView {
     var contentSize = 0.0
     var paralaxWidth = 0.0
     
-    var initialOffset: Double {
-        return type == .normal ? 0.0: 50.0
-    }
+    var initialOffset = 0.0
     
     var paralaxDelta = 0.5
     
@@ -49,6 +47,10 @@ class WalkBGView: UIView {
         self.walkView = walkView
         self.type = type
 
+        if type == .paralax {
+            initialOffset = 160.0
+        }
+        
         super.init(frame: .zero)
         self.clipsToBounds = true
         setup()
@@ -102,5 +104,16 @@ class WalkBGView: UIView {
         blur.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         blur.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
         blur.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+    }
+}
+
+extension WalkBGView: SliderDelegate {
+    func didContentOffsetChange(contentOffset: Double) {
+        // only work for paralax type
+        guard type == .paralax else {
+            return
+        }
+        
+        self.contentOffset = contentOffset
     }
 }

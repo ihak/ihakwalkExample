@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol SliderDelegate {
+    func didContentOffsetChange(contentOffset: Double)
+}
+
 class WalkSlider: UIView {
     let scrollView = UIScrollView(frame: .zero)
     let containerView = UIView()
@@ -16,7 +20,13 @@ class WalkSlider: UIView {
     var milestones = [UIView]()
 
     var currentPage = 0
-    var totalPages = 3
+    var totalPages: Int {
+        return Int(scrollView.contentSize.width/scrollView.bounds.width)
+    }
+    
+    var pageWidth: Double {
+        return Double(scrollView.bounds.width)
+    }
 
     init(backgroundView: WalkBGView? = nil, milestones: [UIView]) {
         self.milestones.append(contentsOf: milestones)
@@ -107,10 +117,20 @@ extension WalkSlider: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         print(scrollView.contentOffset)
         currentPage = Int(scrollView.contentOffset.x / scrollView.bounds.width)
-        print("current page: \(currentPage)")
         
+        // if background view is present and supports paralax
+        // inform the view about offset changes (to allow paralax)
         if backgroundView?.type == .paralax {
             backgroundView?.contentOffset = Double(scrollView.contentOffset.x)
+        }
+        
+        // inform individual views about the offset change
+        for (index, milestone) in milestones.enumerated() {
+            if let bg = milestone as? WalkBGView {
+                let offset = Double(scrollView.contentOffset.x) - (pageWidth * Double(index))
+                
+                bg.didContentOffsetChange(contentOffset: offset)
+            }
         }
     }
 }
