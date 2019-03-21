@@ -13,13 +13,20 @@ protocol SliderDelegate {
 }
 
 class WalkSlider: UIView {
+    let stackView = UIStackView()
+    let pageControl = UIPageControl(frame: .zero)
     let scrollView = UIScrollView(frame: .zero)
+    let skipButton = UIButton(type: .custom)
     let containerView = UIView()
     
     var backgroundView: WalkBGView?
     var milestones = [UIView]()
 
-    var currentPage = 0
+    var currentPage = 0 {
+        didSet {
+            pageControl.currentPage = currentPage
+        }
+    }
     var totalPages: Int {
         return Int(scrollView.contentSize.width/scrollView.bounds.width)
     }
@@ -55,6 +62,7 @@ class WalkSlider: UIView {
     }
     
     func setup() {
+        // if background view is present add it
         if let backgroundView = self.backgroundView {
             backgroundView.translatesAutoresizingMaskIntoConstraints = false
             self.addSubview(backgroundView)
@@ -65,19 +73,27 @@ class WalkSlider: UIView {
             backgroundView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
         }
         
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        // Add stackview
+        stackView.axis = .vertical
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        self.addSubview(stackView)
+        stackView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+        stackView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        stackView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+        stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+        
+        // configure scrollview
         scrollView.backgroundColor = .clear
         scrollView.isPagingEnabled = true
+        scrollView.showsHorizontalScrollIndicator = false
+        scrollView.showsVerticalScrollIndicator = false
         scrollView.delegate = self
-        self.addSubview(scrollView)
-        
-        scrollView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        scrollView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-        scrollView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-        scrollView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
-        
-        scrollView.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
-        
+
+        // ass scrollview to stackview
+        stackView.addArrangedSubview(scrollView)
+
+        // add container view to scrollview
         containerView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.addSubview(containerView)
         containerView.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
@@ -85,6 +101,7 @@ class WalkSlider: UIView {
         containerView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
         containerView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true
         
+        // Add views to container view
         addMileStones(views: milestones, to: containerView)
     }
     
@@ -110,7 +127,34 @@ class WalkSlider: UIView {
             previousView = view
         }
     }
+    
+    func addSkipButton() {
+        skipButton.setTitle("Skip", for: .normal)
+        skipButton.backgroundColor = .orange
+        
+        stackView.addArrangedSubview(skipButton)
+    }
+    
+    func addPageControl() {
+        pageControl.numberOfPages = milestones.count
+        stackView.addArrangedSubview(pageControl)
+    }
 
+    func showPageControl() {
+        self.pageControl.isHidden = false
+    }
+    
+    func hidePageControl() {
+        self.pageControl.isHidden = true
+    }
+    
+    func configurePageControl(_ block: (_ pageControl: UIPageControl) -> Void) {
+        block(pageControl)
+    }
+    
+    func configureButton(_ block: (_ button: UIButton) -> Void) {
+        block(skipButton)
+    }
 }
 
 extension WalkSlider: UIScrollViewDelegate {

@@ -16,8 +16,9 @@ class WalkVC: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        addType6Walk()
+        addType1Walk()
     }
+    
     /**
      *  A common background for every view.
      */
@@ -39,6 +40,13 @@ class WalkVC: UIViewController {
         walkslider.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
         walkslider.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
         walkslider.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+        
+        walkslider.addSkipButton()
+        walkslider.addPageControl()
+        
+        walkslider.configurePageControl { (pagecontrol) in
+            pagecontrol.currentPageIndicatorTintColor = .orange
+        }
     }
     
     /**
@@ -206,5 +214,21 @@ class WalkVC: UIViewController {
         walkslider.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
         walkslider.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
         walkslider.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+    }
+    
+    func addButton() {
+        let button = UIButton(type: .custom)
+        button.setTitle("Skip", for: .normal)
+        button.backgroundColor = .orange
+//        button.contentEdgeInsets = UIEdgeInsets.init(top: 20, left: 20, bottom: 20, right: 20)
+        
+        button.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(button)
+        
+        button.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 20).isActive = true
+//        button.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+        button.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
+        button.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+        
     }
 }
