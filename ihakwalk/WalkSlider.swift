@@ -8,25 +8,34 @@
 
 import UIKit
 
+/**
+ *  A protocol that provides scrollview related updates
+ *  to the interested views.
+ */
 protocol SliderDelegate {
     func didContentOffsetChange(contentOffset: Double)
 }
 
+/**
+ *  A view that takes WalkView and WalkBGView and layout
+ *  the slider accordingly.
+ */
 class WalkSlider: UIView {
-    let stackView = UIStackView()
-    let pageControl = UIPageControl(frame: .zero)
-    let scrollView = UIScrollView(frame: .zero)
-    let skipButton = UIButton(type: .custom)
-    let containerView = UIView()
+    private lazy var stackView = UIStackView()
+    private lazy var pageControl = UIPageControl(frame: .zero)
+    private lazy var scrollView = UIScrollView(frame: .zero)
+    private lazy var skipButton = UIButton(type: .custom)
+    private lazy var containerView = UIView()
     
-    var backgroundView: WalkBGView?
-    var milestones = [UIView]()
+    private var backgroundView: WalkBGView?
+    private var milestones = [UIView]()
 
     var currentPage = 0 {
         didSet {
             pageControl.currentPage = currentPage
         }
     }
+    
     var totalPages: Int {
         return Int(scrollView.contentSize.width/scrollView.bounds.width)
     }
@@ -39,7 +48,7 @@ class WalkSlider: UIView {
         self.milestones.append(contentsOf: milestones)
         self.backgroundView = backgroundView
         
-        super.init(frame: .zero)
+        super.init(frame: CGRect(x: 0, y: 0, width: 10, height: 10))
         setup()
         
         self.setNeedsLayout()
@@ -54,14 +63,20 @@ class WalkSlider: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configureParalax() {
+    /**
+     *  Perform paralax related configurations if background view is present.
+     */
+    private func configureParalax() {
         if let backgroundView = self.backgroundView {
             backgroundView.contentSize = Double(self.scrollView.contentSize.width)
             backgroundView.paralaxDelta = 0.2
         }
     }
     
-    func setup() {
+    /**
+     *  Performs basic setup of the view.
+     */
+    private func setup() {
         // if background view is present add it
         if let backgroundView = self.backgroundView {
             backgroundView.translatesAutoresizingMaskIntoConstraints = false
@@ -76,43 +91,58 @@ class WalkSlider: UIView {
         // Add stackview
         stackView.axis = .vertical
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        
+
         self.addSubview(stackView)
-        stackView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        stackView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-        stackView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-        stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+        let margins = self.layoutMarginsGuide
+        let topConstraint = stackView.topAnchor.constraint(equalTo: margins.topAnchor)
+        topConstraint.priority = .init(rawValue: 999.0)
+        topConstraint.isActive = true
+        
+        stackView.bottomAnchor.constraint(equalTo: margins.bottomAnchor).isActive = true
+        stackView.leadingAnchor.constraint(equalTo: margins.leadingAnchor).isActive = true
+        let trailingConstraint = stackView.trailingAnchor.constraint(equalTo: margins.trailingAnchor)
+        trailingConstraint.priority = .init(rawValue: 999.0)
+        trailingConstraint.isActive = true
+        
         
         // configure scrollview
-        scrollView.backgroundColor = .clear
+        scrollView.backgroundColor = .orange
         scrollView.isPagingEnabled = true
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.showsVerticalScrollIndicator = false
         scrollView.delegate = self
 
-        // ass scrollview to stackview
+        // aadd scrollview to stackview
         stackView.addArrangedSubview(scrollView)
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
 
         // add container view to scrollview
+        containerView.backgroundColor = UIColor.magenta
         containerView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.addSubview(containerView)
         containerView.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
         containerView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
         containerView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
         containerView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true
+        containerView.heightAnchor.constraint(equalTo: scrollView.frameLayoutGuide.heightAnchor).isActive = true
         
         // Add views to container view
         addMileStones(views: milestones, to: containerView)
     }
     
-    func addMileStones(views: [UIView], to container:UIView) {
+    /**
+     *  Adds WalkViews to the containerView which is added on the
+     *  scrollview.
+     */
+    private func addMileStones(views: [UIView], to container:UIView) {
         var previousView: UIView!
         for (index, view) in views.enumerated() {
+            view.backgroundColor =  .brown
             view.translatesAutoresizingMaskIntoConstraints = false
             container.addSubview(view)
             view.topAnchor.constraint(equalTo: container.topAnchor).isActive = true
             view.bottomAnchor.constraint(equalTo: container.bottomAnchor).isActive = true
-            view.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width).isActive = true
+            view.widthAnchor.constraint(equalTo: self.stackView.widthAnchor).isActive = true
             
             if previousView != nil {
                 view.leadingAnchor.constraint(equalTo: previousView.trailingAnchor).isActive = true
@@ -128,6 +158,9 @@ class WalkSlider: UIView {
         }
     }
     
+    /**
+     *  Adds skip button to the stackview.
+     */
     func addSkipButton() {
         skipButton.setTitle("Skip", for: .normal)
         skipButton.backgroundColor = .orange
@@ -135,23 +168,38 @@ class WalkSlider: UIView {
         stackView.addArrangedSubview(skipButton)
     }
     
+    /**
+     *  Adds page control to the stackview.
+     */
     func addPageControl() {
         pageControl.numberOfPages = milestones.count
         stackView.addArrangedSubview(pageControl)
     }
 
+    /**
+     *  Shows page control.
+     */
     func showPageControl() {
         self.pageControl.isHidden = false
     }
     
+    /**
+     *  Hides page control.
+     */
     func hidePageControl() {
         self.pageControl.isHidden = true
     }
     
+    /**
+     *  Performs custom configurations on page control
+     */
     func configurePageControl(_ block: (_ pageControl: UIPageControl) -> Void) {
         block(pageControl)
     }
     
+    /**
+     *  Performs custom configurations on skip button.
+     */
     func configureButton(_ block: (_ button: UIButton) -> Void) {
         block(skipButton)
     }

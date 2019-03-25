@@ -16,7 +16,10 @@ class WalkVC: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        addType1Walk()
+        addSurfboardWalk()
+        
+        print("system minimum layout margins of vc: \(self.systemMinimumLayoutMargins)")
+        print("directionalLayoutMargins of view: \(self.view.directionalLayoutMargins)")
     }
     
     /**
@@ -230,5 +233,36 @@ class WalkVC: UIViewController {
         button.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
         button.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
         
+    }
+    
+    func addSurfboardWalk() {
+        let walk1 = WalkView(title: "Hello", descriptionText: "Surfboard makes it delightfully easy to craft onboarding experiences.", image: UIImage(named: "architecture_1"), sequence: [.description, .image, .title]) { (walkView, _, description, imageView) in
+            description?.font = UIFont(name: "AvenirNext-Regular", size: 17.0)
+            description?.textColor = .white
+            imageView?.tintColor = .white
+            walkView.addCustomSpacing(spacing: 20.0, after: description!)
+        }
+        
+        let walk2 = WalkView(descriptionText: "Surfboard makes it delightfully easy to craft onboarding experiences.", image: UIImage(named: "surfer"), sequence: [.description, .image]) { (walkView, _, description, imageView) in
+            description?.font = UIFont(name: "AvenirNext-Regular", size: 17.0)
+            description?.textColor = .white
+            imageView?.tintColor = .white
+            walkView.addCustomSpacing(spacing: 20.0, after: description!)
+        }
+        
+        let bgView = WalkBGView(color: UIColor(red: 12.0/256.0, green: 18.0/256.0, blue: 148.0/256.0, alpha: 1.0))
+        
+        let walkslider = WalkSlider(backgroundView: bgView, milestones: [walk1, walk2])
+        walkslider.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 40.0, leading: 16.0, bottom: 0.0, trailing: 16.0)
+        walkslider.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(walkslider)
+        
+        walkslider.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
+        walkslider.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+        walkslider.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
+        walkslider.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+        
+        walkslider.addPageControl()
+        walkslider.addSkipButton()
     }
 }

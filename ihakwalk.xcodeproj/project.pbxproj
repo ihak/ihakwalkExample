@@ -17,6 +17,7 @@
 		E43C90EA223BB38D00898DF2 /* WalkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43C90E9223BB38D00898DF2 /* WalkView.swift */; };
 		E43C90EC223FAE2A00898DF2 /* WalkBGView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43C90EB223FAE2A00898DF2 /* WalkBGView.swift */; };
 		E43C90EE2240B8D200898DF2 /* WalkSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43C90ED2240B8D200898DF2 /* WalkSlider.swift */; };
+		E43C90F122449D7300898DF2 /* UIColor+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43C90F022449D7200898DF2 /* UIColor+Image.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,7 @@
 		E43C90E9223BB38D00898DF2 /* WalkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkView.swift; sourceTree = "<group>"; };
 		E43C90EB223FAE2A00898DF2 /* WalkBGView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkBGView.swift; sourceTree = "<group>"; };
 		E43C90ED2240B8D200898DF2 /* WalkSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkSlider.swift; sourceTree = "<group>"; };
+		E43C90F022449D7200898DF2 /* UIColor+Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Image.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +87,7 @@
 		E43C90C6223A7BF500898DF2 /* ihakwalk */ = {
 			isa = PBXGroup;
 			children = (
+				E43C90EF22449CF100898DF2 /* Extensions */,
 				E43C90C7223A7BF500898DF2 /* AppDelegate.swift */,
 				E43C90C9223A7BF500898DF2 /* ViewController.swift */,
 				E43C90CB223A7BF500898DF2 /* Main.storyboard */,
@@ -106,6 +109,14 @@
 				E43C90DE223A7BF700898DF2 /* Info.plist */,
 			);
 			path = ihakwalkTests;
+			sourceTree = "<group>";
+		};
+		E43C90EF22449CF100898DF2 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				E43C90F022449D7200898DF2 /* UIColor+Image.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -210,6 +221,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E43C90CA223A7BF500898DF2 /* ViewController.swift in Sources */,
+				E43C90F122449D7300898DF2 /* UIColor+Image.swift in Sources */,
 				E43C90C8223A7BF500898DF2 /* AppDelegate.swift in Sources */,
 				E43C90E8223A7CD300898DF2 /* WalkVC.swift in Sources */,
 				E43C90EE2240B8D200898DF2 /* WalkSlider.swift in Sources */,

@@ -8,30 +8,52 @@
 
 import UIKit
 
+/**
+ *  A view that works as a background view for individual slides
+ *  as well as for the whole component. It supports an image or a
+ *  color. Also provides paralax effect and blur.
+ */
 class WalkBGView: UIView {
     enum BackgroundType {
         case normal, paralax
     }
     
-    var imageView: UIImageView?
-    var walkView: WalkView?
-    var leadingConstraint: NSLayoutConstraint!
+    private var imageView: UIImageView?
+    private var walkView: WalkView?
+    private var leadingConstraint: NSLayoutConstraint!
     
     var type: BackgroundType = .normal
     
-    var contentSize = 0.0
-    var paralaxWidth = 0.0
+    public var contentSize = 0.0
+    private var paralaxWidth = 0.0
     
-    var initialOffset = 0.0
+    /**
+     *  Offset the background to allow negative scroll.
+     *  It reveals the image in bounce effect of scrollview.
+     */
+    public var initialOffset = 0.0
     
-    var paralaxDelta = 0.5
+    /**
+     *  Configures how much image is moved upon each pixel moved by the
+     *  scrollview. Best results are achieved when its value is < 1.
+     *  Keep into account your image width when setting this value.
+     *  If the value is too large as compared to the width of the image
+     *  blank background (or superview) is displayed when image ends.
+     */
+    public var paralaxDelta = 0.5
     
-    var contentOffset = 0.0 {
+    /**
+     *  Amount by which current page has moved.
+     */
+    public var contentOffset = 0.0 {
         didSet {
             paralaxOffset = contentOffset * paralaxDelta
         }
     }
     
+    /**
+     *  Amount by which background image has moved.
+     */
     var paralaxOffset = 0.0 {
         didSet {
             leadingConstraint.constant = CGFloat(paralaxOffset + initialOffset) * -1
@@ -56,11 +78,23 @@ class WalkBGView: UIView {
         setup()
     }
     
+    init(color: UIColor, walkView: WalkView? = nil) {
+        self.imageView = UIImageView(image: color.image().resizableImage(withCapInsets: .zero))
+        self.walkView = walkView
+        super.init(frame: .zero)
+        self.clipsToBounds = true
+        setup()
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setup() {
+    /**
+     * Carries out the initialization of the subviews and add them
+     *  to the superview.
+     */
+    private func setup() {
         if let imageView = self.imageView {
             self.addSubview(imageView)
             imageView.contentMode = .scaleAspectFill
@@ -87,8 +121,10 @@ class WalkBGView: UIView {
             walkView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
         }
     }
-    
-    func addBlur(style: UIBlurEffect.Style) {
+    /**
+     *  Adds blur to the background.
+     */
+    public func addBlur(style: UIBlurEffect.Style) {
         let blurEffect = UIBlurEffect(style: style)
         let blur = UIVisualEffectView(effect: blurEffect)
         blur.translatesAutoresizingMaskIntoConstraints = false

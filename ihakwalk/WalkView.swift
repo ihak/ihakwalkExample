@@ -7,18 +7,25 @@
 //
 
 import UIKit
+/**
+ * A view composed of a title, description and image. It is a basic element
+ *  of this component. For functionality, customizations or configurations
+ *  checkout the methods exposed by this class.
+ */
 
 class WalkView: UIView {
-    var title: String?
-    var descriptionText: String?
-    var image: UIImage?
+    private var title: String?
+    private var descriptionText: String?
+    private var image: UIImage?
     
-    var titleLabel: UILabel?
-    var descriptionLabel: UILabel?
-    var imageView: UIImageView?
-    var sequence: [DisplayItem]
+    private lazy var stackView = UIStackView()
     
-    typealias Configuration = (_ title: UILabel?,_ description: UILabel?,_ image: UIImageView?) -> Void
+    private var titleLabel: UILabel?
+    private var descriptionLabel: UILabel?
+    private var imageView: UIImageView?
+    private var sequence: [DisplayItem]
+    
+    typealias Configuration = (_ walkView: WalkView, _ title: UILabel?,_ description: UILabel?,_ image: UIImageView?) -> Void
     
     enum DisplayItem {
         case title, description, image
@@ -37,7 +44,7 @@ class WalkView: UIView {
         self.image = image
         self.sequence = sequence
         
-        defaultConfiguration = { (title, _, image) in
+        defaultConfiguration = { (self, title, _, image) in
             title?.textColor = .white
             title?.font = UIFont.boldSystemFont(ofSize: 20)
             title?.numberOfLines = 2
@@ -53,7 +60,10 @@ class WalkView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func correspondingView(displayItem: DisplayItem) -> UIView? {
+    /**
+     *  Returns the corresponding view of a DisplayItem.
+     */
+    private func correspondingView(displayItem: DisplayItem) -> UIView? {
         switch displayItem {
         case .title:
             return titleLabel
@@ -64,38 +74,76 @@ class WalkView: UIView {
         }
     }
 
-    func configure() {
-        defaultConfiguration(titleLabel, descriptionLabel, imageView)
-        configuration?(titleLabel, descriptionLabel, imageView)
+    /**
+     *  calls default and user provided configuration blocks
+     *  to perform default and custom configurations on display items.
+     */
+    private func configure() {
+        defaultConfiguration(self, titleLabel, descriptionLabel, imageView)
+        configuration?(self, titleLabel, descriptionLabel, imageView)
     }
+    
+    /**
+     *  Adds custom spacing after a view in stackview.
+     *  Call this method in configuration block to make it work.
+     */
+    func addCustomSpacing(spacing: Double, after view: UIView) {
+        self.stackView.setCustomSpacing(CGFloat(spacing), after: view)
+    }
+    
+    /**
+     *  This is the main method that carries out the heave work of setting-up
+     *  this view. The settings involves initialization of display elements,
+     *  adding them to the view and configuring their basic properties
+     *  e.g. font, numberOfLines, textAlignment, etc.
+     */
 
-    func setup() {
-        
+    private func setup() {
+        // configure title label
         titleLabel = UILabel()
+        titleLabel?.numberOfLines = 0
         titleLabel?.text = self.title
+        titleLabel?.allowsDefaultTighteningForTruncation = true
+        titleLabel?.setContentHuggingPriority(.defaultHigh, for: .vertical)
+        titleLabel?.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
+        titleLabel?.textAlignment = .center
 
+        // configure description label
         descriptionLabel = UILabel()
+        descriptionLabel?.numberOfLines = 0
         descriptionLabel?.text = self.descriptionText
+        descriptionLabel?.textAlignment = .center
 
+        // configure imageview
         imageView = UIImageView(image: self.image)
+        imageView?.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
+        imageView?.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        imageView?.setContentHuggingPriority(.defaultLow, for: .vertical)
+        imageView?.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        imageView?.contentMode = .scaleAspectFill
+        imageView?.clipsToBounds = true
 
-        let stackView = UIStackView()
         stackView.axis = .vertical
         
+        // loop through the display items in sequence array and add them
+        // to stackview in given sequence
         for item in sequence {
             if let view = correspondingView(displayItem: item) {
                 stackView.addArrangedSubview(view)
             }
         }
         
+        // Configure stackview
         stackView.alignment = .center
         stackView.distribution = .equalSpacing
-        stackView.isLayoutMarginsRelativeArrangement = true
+        stackView.isLayoutMarginsRelativeArrangement = false
         stackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        // add stackview to superview
         self.addSubview(stackView)
         stackView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         stackView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
         stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
-//        stackView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        stackView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
     }
 }
