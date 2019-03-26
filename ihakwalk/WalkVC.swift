@@ -9,17 +9,21 @@
 import UIKit
 
 class WalkVC: UIViewController {
-    var scrollView: UIScrollView!
-    var currentPage = 0
-
+    var walkSlider: WalkSlider!
+    
+    convenience init(walkSlider: WalkSlider) {
+        self.init()
+        self.walkSlider = walkSlider
+        self.walkSlider.skipButtonAction { (_) in
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        addSurfboardWalk()
-        
-        print("system minimum layout margins of vc: \(self.systemMinimumLayoutMargins)")
-        print("directionalLayoutMargins of view: \(self.view.directionalLayoutMargins)")
+        addWalkSlider()
     }
     
     /**
@@ -285,5 +289,15 @@ class WalkVC: UIViewController {
         walkslider.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
         
         walkslider.addPageControl()
+    }
+    
+    func addWalkSlider() {
+        walkSlider.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(walkSlider)
+        
+        walkSlider.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
+        walkSlider.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+        walkSlider.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
+        walkSlider.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
     }
 }

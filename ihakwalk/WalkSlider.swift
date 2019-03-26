@@ -30,6 +30,8 @@ class WalkSlider: UIView {
     private var backgroundView: WalkBGView?
     private var milestones = [UIView]()
 
+    private var skipButtonAction: ((_ button: UIButton) -> Void)?
+    
     var currentPage = 0 {
         didSet {
             pageControl.currentPage = currentPage
@@ -161,6 +163,7 @@ class WalkSlider: UIView {
     func addSkipButton() {
         skipButton.setTitle("Skip", for: .normal)
         skipButton.backgroundColor = .orange
+        skipButton.addTarget(self, action: #selector(skipButtonTapped(sender:)), for: .touchUpInside)
         
         stackView.addArrangedSubview(skipButton)
     }
@@ -197,8 +200,16 @@ class WalkSlider: UIView {
     /**
      *  Performs custom configurations on skip button.
      */
-    func configureButton(_ block: (_ button: UIButton) -> Void) {
+    func configureSkipButton(_ block: (_ button: UIButton) -> Void) {
         block(skipButton)
+    }
+    
+    func skipButtonAction(_ block: @escaping (_ button: UIButton) -> Void) {
+        skipButtonAction = block
+    }
+    
+    @objc func skipButtonTapped(sender: UIButton) {
+        skipButtonAction?(skipButton)
     }
 }
 

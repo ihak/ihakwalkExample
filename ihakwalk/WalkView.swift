@@ -120,7 +120,7 @@ class WalkView: UIView {
         imageView?.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
         imageView?.setContentHuggingPriority(.defaultLow, for: .vertical)
         imageView?.setContentHuggingPriority(.defaultLow, for: .horizontal)
-        imageView?.contentMode = .scaleAspectFill
+        imageView?.contentMode = .scaleAspectFit
         imageView?.clipsToBounds = true
 
         stackView.axis = .vertical
