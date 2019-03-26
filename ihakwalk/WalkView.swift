@@ -136,7 +136,7 @@ class WalkView: UIView {
         // Configure stackview
         stackView.alignment = .center
         stackView.distribution = .equalSpacing
-        stackView.isLayoutMarginsRelativeArrangement = false
+        stackView.isLayoutMarginsRelativeArrangement = true
         stackView.translatesAutoresizingMaskIntoConstraints = false
         
         // add stackview to superview

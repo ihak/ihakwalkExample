@@ -106,7 +106,6 @@ class WalkSlider: UIView {
         
         
         // configure scrollview
-        scrollView.backgroundColor = .orange
         scrollView.isPagingEnabled = true
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.showsVerticalScrollIndicator = false
@@ -117,7 +116,6 @@ class WalkSlider: UIView {
         scrollView.translatesAutoresizingMaskIntoConstraints = false
 
         // add container view to scrollview
-        containerView.backgroundColor = UIColor.magenta
         containerView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.addSubview(containerView)
         containerView.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
@@ -137,7 +135,6 @@ class WalkSlider: UIView {
     private func addMileStones(views: [UIView], to container:UIView) {
         var previousView: UIView!
         for (index, view) in views.enumerated() {
-            view.backgroundColor =  .brown
             view.translatesAutoresizingMaskIntoConstraints = false
             container.addSubview(view)
             view.topAnchor.constraint(equalTo: container.topAnchor).isActive = true

@@ -236,9 +236,10 @@ class WalkVC: UIViewController {
     }
     
     func addSurfboardWalk() {
-        let walk1 = WalkView(title: "Hello", descriptionText: "Surfboard makes it delightfully easy to craft onboarding experiences.", image: UIImage(named: "architecture_1"), sequence: [.description, .image, .title]) { (walkView, _, description, imageView) in
+        let walk1 = WalkView(descriptionText: "Welcome to Surfboard.", image: UIImage(named: "iPhone"), sequence: [.description, .image, .title]) { (walkView, _, description, imageView) in
             description?.font = UIFont(name: "AvenirNext-Regular", size: 17.0)
             description?.textColor = .white
+            description?.layoutMargins = UIEdgeInsets(top: 0.0, left: 30.0, bottom: 0.0, right: 30.0)
             imageView?.tintColor = .white
             walkView.addCustomSpacing(spacing: 20.0, after: description!)
         }
@@ -250,9 +251,30 @@ class WalkVC: UIViewController {
             walkView.addCustomSpacing(spacing: 20.0, after: description!)
         }
         
+        let walk3 = WalkView(descriptionText: "You provide an array of panels and Surfboard figures out the rest.", image: UIImage(named: "panels"), sequence: [.description, .image]) { (walkView, _, description, imageView) in
+            description?.font = UIFont(name: "AvenirNext-Regular", size: 17.0)
+            description?.textColor = .white
+            imageView?.tintColor = .white
+            walkView.addCustomSpacing(spacing: 20.0, after: description!)
+        }
+        
+        let walk4 = WalkView(descriptionText: "See the documentation on GitHub for more information.", image: UIImage(named: "github"), sequence: [.description, .image]) { (walkView, _, description, imageView) in
+            description?.font = UIFont(name: "AvenirNext-Regular", size: 17.0)
+            description?.textColor = .white
+            imageView?.tintColor = .white
+            walkView.addCustomSpacing(spacing: 20.0, after: description!)
+        }
+        
+        let walk5 = WalkView(descriptionText: "If you like Surfboard give me a shoutout on Twitter. I'm @bermaniasstudios.", image: UIImage(named: "twitter"), sequence: [.description, .image]) { (walkView, _, description, imageView) in
+            description?.font = UIFont(name: "AvenirNext-Regular", size: 17.0)
+            description?.textColor = .white
+            imageView?.tintColor = .white
+            walkView.addCustomSpacing(spacing: 20.0, after: description!)
+        }
+        
         let bgView = WalkBGView(color: UIColor(red: 12.0/256.0, green: 18.0/256.0, blue: 148.0/256.0, alpha: 1.0))
         
-        let walkslider = WalkSlider(backgroundView: bgView, milestones: [walk1, walk2])
+        let walkslider = WalkSlider(backgroundView: bgView, milestones: [walk1, walk2, walk3, walk4, walk5])
         walkslider.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 40.0, leading: 16.0, bottom: 0.0, trailing: 16.0)
         walkslider.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(walkslider)
@@ -263,6 +285,5 @@ class WalkVC: UIViewController {
         walkslider.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
         
         walkslider.addPageControl()
-        walkslider.addSkipButton()
     }
 }
