@@ -162,7 +162,13 @@ class WalkSlider: UIView {
      */
     func addSkipButton() {
         skipButton.setTitle("Skip", for: .normal)
-        skipButton.backgroundColor = .orange
+        skipButton.setTitleColor(.white, for: .normal)
+        skipButton.backgroundColor = .clear
+        
+        skipButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
+        skipButton.titleLabel?.adjustsFontForContentSizeCategory = true
+        skipButton.contentEdgeInsets = UIEdgeInsets(top: 20, left: 10, bottom: 20, right: 10)
+
         skipButton.addTarget(self, action: #selector(skipButtonTapped(sender:)), for: .touchUpInside)
         
         stackView.addArrangedSubview(skipButton)
@@ -216,6 +222,10 @@ class WalkSlider: UIView {
 extension WalkSlider: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         print(scrollView.contentOffset)
+        guard scrollView.bounds.width > 0 else {
+            print("Error: Scrollview width is <= zero.")
+            return
+        }
         currentPage = Int(scrollView.contentOffset.x / scrollView.bounds.width)
         
         // if background view is present and supports paralax

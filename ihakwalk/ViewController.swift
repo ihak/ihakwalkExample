@@ -16,7 +16,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func sliderButtonTapped(_ sender: Any) {
-        self.addSurfboardSliderVC()
+        self.addABCIntroView()
     }
     
     func addSurfboardSliderVC() {
@@ -72,6 +72,43 @@ class ViewController: UIViewController {
         
         let walkVC = WalkVC(walkSlider: walkslider)
         let navigationController = UINavigationController(rootViewController: walkVC)
+        self.present(navigationController, animated: true
+            , completion: nil)
+    }
+    
+    func addABCIntroView() {
+        let walk1 = WalkView(title: "Pixifly", descriptionText: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. Lorem Ipsum is simply dummy text of the printing and typesetting industry.", image: UIImage(named: "Intro_Screen_One"), sequence: [.title, .image, .description]) { (walkview, titleLabel, descriptionLabel, imageView) in
+            walkview.addCustomSpacing(spacing: 20.0, after: imageView!)
+        }
+        
+        let walk2 = WalkView(title: "DropShot", descriptionText: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.", image: UIImage(named: "Intro_Screen_Two"), sequence: [.title, .image, .description]) { (walkview, titleLabel, descriptionLabel, imageView) in
+            walkview.addCustomSpacing(spacing: 20.0, after: imageView!)
+        }
+        
+        
+        let walk3 = WalkView(title: "Shaktaya", descriptionText: "Description for third screen.", image: UIImage(named: "Intro_Screen_Three"), sequence: [.title, .image, .description]) 
+        
+        let walk4 = WalkView(title: "Punctual", descriptionText: "Description for fourth screen.", image: UIImage(named: "Intro_Screen_Four"), sequence: [.title, .image, .description])
+        
+        let backgroundView = WalkBGView(color: UIColor(white: 0.149, alpha: 1.0))
+
+        let walkSlider = WalkSlider(backgroundView: backgroundView, milestones: [walk1, walk2, walk3, walk4])
+        
+        walkSlider.addPageControl()
+        walkSlider.addSkipButton()
+        
+        walkSlider.configureSkipButton { (button) in
+            button.backgroundColor = UIColor(red: 0.129, green: 0.588, blue: 0.953, alpha: 1.0)
+            button.setTitle("Let's Go", for: .normal)
+        }
+        
+        walkSlider.configurePageControl { (pageControl) in
+            pageControl.currentPageIndicatorTintColor = UIColor(red: 0.129, green: 0.588, blue: 0.953, alpha: 1.0)
+        }
+        
+        let walkVC = WalkVC(walkSlider: walkSlider)
+        let navigationController = UINavigationController(rootViewController: walkVC)
+        navigationController.isNavigationBarHidden = true
         self.present(navigationController, animated: true
             , completion: nil)
     }

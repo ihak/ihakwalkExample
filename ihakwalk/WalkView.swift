@@ -31,8 +31,8 @@ class WalkView: UIView {
         case title, description, image
     }
     
-    var defaultConfiguration: Configuration
-    var configuration: Configuration?
+    private var defaultConfiguration: Configuration
+    private var configuration: Configuration?
     
     init(title:String? = nil,
          descriptionText:String? = nil,
@@ -44,10 +44,15 @@ class WalkView: UIView {
         self.image = image
         self.sequence = sequence
         
-        defaultConfiguration = { (self, title, _, image) in
+        defaultConfiguration = { (self, title, description, image) in
             title?.textColor = .white
-            title?.font = UIFont.boldSystemFont(ofSize: 20)
             title?.numberOfLines = 2
+            title?.font = UIFont.preferredFont(forTextStyle: .title1)
+            title?.adjustsFontForContentSizeCategory = true
+            
+            description?.textColor = .white
+            description?.font = UIFont.preferredFont(forTextStyle: .body)
+            description?.adjustsFontForContentSizeCategory = true
         }
         
         self.configuration = configuration
