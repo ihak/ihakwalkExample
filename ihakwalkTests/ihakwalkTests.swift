@@ -20,8 +20,10 @@ class ihakwalkTests: XCTestCase {
     }
 
     func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        for name in UIFont.familyNames {
+            print(name)
+            print(UIFont.fontNames(forFamilyName: name))
+        }
     }
 
     func testPerformanceExample() {
