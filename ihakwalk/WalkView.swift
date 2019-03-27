@@ -118,6 +118,9 @@ class WalkView: UIView {
         descriptionLabel?.numberOfLines = 0
         descriptionLabel?.text = self.descriptionText
         descriptionLabel?.textAlignment = .center
+        descriptionLabel?.setContentHuggingPriority(.defaultHigh, for: .vertical)
+        descriptionLabel?.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
+
 
         // configure imageview
         imageView = UIImageView(image: self.image)
@@ -140,7 +143,7 @@ class WalkView: UIView {
         
         // Configure stackview
         stackView.alignment = .center
-        stackView.distribution = .equalSpacing
+        stackView.distribution = .equalCentering
         stackView.isLayoutMarginsRelativeArrangement = true
         stackView.translatesAutoresizingMaskIntoConstraints = false
         
