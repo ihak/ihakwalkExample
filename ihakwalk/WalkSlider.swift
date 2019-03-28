@@ -118,7 +118,7 @@ class WalkSlider: UIView {
         containerView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.addSubview(containerView)
         let contentLayoutGuide = scrollView.contentLayoutGuide
-        containerView.topAnchor.constraint(equalTo: margins.topAnchor).isActive = true
+        containerView.topAnchor.constraint(equalTo: contentLayoutGuide.topAnchor).isActive = true
 //        containerView.bottomAnchor.constraint(equalTo: contentLayoutGuide.bottomAnchor).isActive = true
         containerView.leadingAnchor.constraint(equalTo: contentLayoutGuide.leadingAnchor).isActive = true
         containerView.trailingAnchor.constraint(equalTo: contentLayoutGuide.trailingAnchor).isActive = true
@@ -164,6 +164,7 @@ class WalkSlider: UIView {
                 walkView.trailingAnchor.constraint(equalTo: container.trailingAnchor).isActive = true
             }
             
+            // Add the background view
             if let bgView = bgView {
                 bgView.translatesAutoresizingMaskIntoConstraints = false
                 container.insertSubview(bgView, belowSubview: walkView)

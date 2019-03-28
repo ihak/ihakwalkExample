@@ -81,22 +81,31 @@ class ViewController: UIViewController {
     }
     
     func addABCIntroView() {
-        let walk1 = WalkView(title: "Pixifly", descriptionText: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry.", image: UIImage(named: "Intro_Screen_One"), sequence: [.title, .image, .description]) { (walkview, titleLabel, descriptionLabel, imageView) in
+        let walk1 = WalkView(title: "Pixifly", descriptionText: "Description for First Screen.", image: UIImage(named: "Intro_Screen_One"), sequence: [.title, .image, .description]) { (walkview, titleLabel, descriptionLabel, imageView) in
+            walkview.addCustomSpacing(spacing: 20.0, after: titleLabel!)
+            walkview.addCustomSpacing(spacing: 20.0, after: imageView!)
         }
         
-        let walk2 = WalkView(title: "DropShot", descriptionText: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.", image: UIImage(named: "Intro_Screen_Two"), sequence: [.title, .image, .description]) { (walkview, titleLabel, descriptionLabel, imageView) in
-//            walkview.addCustomSpacing(spacing: 20.0, after: imageView!)
+        let walk2 = WalkView(title: "DropShot", descriptionText: "Description for Second Screen.", image: UIImage(named: "Intro_Screen_Two"), sequence: [.title, .image, .description]) { (walkview, titleLabel, descriptionLabel, imageView) in
+            walkview.addCustomSpacing(spacing: 20.0, after: titleLabel!)
+            walkview.addCustomSpacing(spacing: 20.0, after: imageView!)
         }
         
         
-        let walk3 = WalkView(title: "Shaktaya", descriptionText: "Description for third screen.", image: UIImage(named: "Intro_Screen_Three"), sequence: [.title, .image, .description]) 
+        let walk3 = WalkView(title: "Shaktaya", descriptionText: "Description for Third Screen.", image: UIImage(named: "Intro_Screen_Three"), sequence: [.title, .image, .description]){ (walkview, titleLabel, descriptionLabel, imageView) in
+            walkview.addCustomSpacing(spacing: 20.0, after: titleLabel!)
+            walkview.addCustomSpacing(spacing: 20.0, after: imageView!)
+        }
         
-        let walk4 = WalkView(title: "Punctual", descriptionText: "Description for fourth screen.", image: UIImage(named: "Intro_Screen_Four"), sequence: [.title, .image, .description])
+        let walk4 = WalkView(title: "Punctual", descriptionText: "Description for Fourth Screen.", image: UIImage(named: "Intro_Screen_Four"), sequence: [.title, .image, .description]){ (walkview, titleLabel, descriptionLabel, imageView) in
+            walkview.addCustomSpacing(spacing: 20.0, after: titleLabel!)
+            walkview.addCustomSpacing(spacing: 20.0, after: imageView!)
+        }
         
         let backgroundView = WalkBGView(color: UIColor(white: 0.149, alpha: 1.0))
 
         let walkSlider = WalkSlider(backgroundView: backgroundView, milestones: [walk1, walk2, walk3, walk4])
-        walkSlider.directionalLayoutMargins = .init(top: 20.0, leading: 10.0, bottom: 20.0, trailing: 10.0)
+        walkSlider.directionalLayoutMargins = .init(top: 20.0, leading: 30.0, bottom: 0.0, trailing: 30.0)
 
         walkSlider.addPageControl()
         walkSlider.addSkipButton()
@@ -104,6 +113,10 @@ class ViewController: UIViewController {
         walkSlider.configureSkipButton { (button) in
             button.backgroundColor = UIColor(red: 0.129, green: 0.588, blue: 0.953, alpha: 1.0)
             button.setTitle("Let's Go", for: .normal)
+            button.contentEdgeInsets = .init(top: 10.0, left: 30.0, bottom: 10.0, right: 30.0)
+//            button.layer.cornerRadius = 5.0
+            button.widthAnchor.constraint(equalTo: walkSlider.widthAnchor).isActive = true
+            button.heightAnchor.constraint(equalTo: button.widthAnchor, multiplier: 0.15).isActive = true
         }
         
         walkSlider.configurePageControl { (pageControl) in

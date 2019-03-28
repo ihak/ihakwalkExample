@@ -121,6 +121,7 @@ class WalkBGView: UIView {
 //            walkView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
 //        }
     }
+    
     /**
      *  Adds blur to the background.
      */
