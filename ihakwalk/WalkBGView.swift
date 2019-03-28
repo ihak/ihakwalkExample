@@ -19,7 +19,7 @@ class WalkBGView: UIView {
     }
     
     private var imageView: UIImageView?
-    private var walkView: WalkView?
+    private(set) var walkView: WalkView?
     private var leadingConstraint: NSLayoutConstraint!
     
     var type: BackgroundType = .normal
@@ -111,15 +111,15 @@ class WalkBGView: UIView {
             }
         }
         
-        if let walkView = self.walkView {
-            self.addSubview(walkView)
-            walkView.translatesAutoresizingMaskIntoConstraints = false
-            
-            walkView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-            walkView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-            walkView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-            walkView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
-        }
+//        if let walkView = self.walkView {
+//            self.addSubview(walkView)
+//            walkView.translatesAutoresizingMaskIntoConstraints = false
+//
+//            walkView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+//            walkView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+//            walkView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+//            walkView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+//        }
     }
     /**
      *  Adds blur to the background.

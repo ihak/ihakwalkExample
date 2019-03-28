@@ -13,7 +13,7 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    let examples = ["ABCIntro Walk", "Surfboard Walk", "Fixed BG Walk", "Different Bg Walk", "Fixed BG Paralax Walk","Different BG Paralax Walk", "Fixed BG Blur Walk", "Different BG Blur Walk"]
+    let examples = ["ABCIntro Walk", "Surfboard Walk", "Fixed BG Walk", "Different BG Walk", "Fixed BG Paralax Walk","Different BG Paralax Walk", "Fixed BG Blur Walk", "Different BG Blur Walk"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,12 +81,11 @@ class ViewController: UIViewController {
     }
     
     func addABCIntroView() {
-        let walk1 = WalkView(title: "Pixifly", descriptionText: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. Lorem Ipsum is simply dummy text of the printing and typesetting industry.", image: UIImage(named: "Intro_Screen_One"), sequence: [.title, .image, .description]) { (walkview, titleLabel, descriptionLabel, imageView) in
-            walkview.addCustomSpacing(spacing: 20.0, after: imageView!)
+        let walk1 = WalkView(title: "Pixifly", descriptionText: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry.", image: UIImage(named: "Intro_Screen_One"), sequence: [.title, .image, .description]) { (walkview, titleLabel, descriptionLabel, imageView) in
         }
         
         let walk2 = WalkView(title: "DropShot", descriptionText: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.", image: UIImage(named: "Intro_Screen_Two"), sequence: [.title, .image, .description]) { (walkview, titleLabel, descriptionLabel, imageView) in
-            walkview.addCustomSpacing(spacing: 20.0, after: imageView!)
+//            walkview.addCustomSpacing(spacing: 20.0, after: imageView!)
         }
         
         
@@ -97,7 +96,8 @@ class ViewController: UIViewController {
         let backgroundView = WalkBGView(color: UIColor(white: 0.149, alpha: 1.0))
 
         let walkSlider = WalkSlider(backgroundView: backgroundView, milestones: [walk1, walk2, walk3, walk4])
-        
+        walkSlider.directionalLayoutMargins = .init(top: 20.0, leading: 10.0, bottom: 20.0, trailing: 10.0)
+
         walkSlider.addPageControl()
         walkSlider.addSkipButton()
         
@@ -112,7 +112,7 @@ class ViewController: UIViewController {
         
         let walkVC = WalkVC(walkSlider: walkSlider)
         let navigationController = UINavigationController(rootViewController: walkVC)
-        navigationController.isNavigationBarHidden = true
+        navigationController.isNavigationBarHidden = false
         self.present(navigationController, animated: true
             , completion: nil)
     }
@@ -152,7 +152,8 @@ class ViewController: UIViewController {
         let walk3 = WalkBGView(image: UIImage(named: "3"), walkView: WalkView(title: "Title 3", descriptionText: "Description for title 3.", image: UIImage(named: "title2"), sequence: [.image, .title, .description]))
         
         let walkslider = WalkSlider(milestones: [walk1, walk2, walk3])
-        
+        walkslider.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 40.0, leading: 16.0, bottom: 40.0, trailing: 16.0)
+
         walkslider.addPageControl()
         walkslider.addSkipButton()
         

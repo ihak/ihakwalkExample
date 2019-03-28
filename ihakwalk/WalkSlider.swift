@@ -21,11 +21,11 @@ protocol SliderDelegate {
  *  the slider accordingly.
  */
 class WalkSlider: UIView {
-    private lazy var stackView = UIStackView()
     private lazy var pageControl = UIPageControl(frame: .zero)
     private lazy var scrollView = UIScrollView(frame: .zero)
     private lazy var skipButton = UIButton(type: .custom)
     private lazy var containerView = UIView()
+    private lazy var backgroundContainerView = UIView()
     
     private var backgroundView: WalkBGView?
     private var milestones = [UIView]()
@@ -90,19 +90,20 @@ class WalkSlider: UIView {
             backgroundView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
         }
         
-        // Add stackview
-        stackView.axis = .vertical
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-
-        self.addSubview(stackView)
+        // Add scrollview to superview
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(scrollView)
+        
         let margins = self.layoutMarginsGuide
-        let topConstraint = stackView.topAnchor.constraint(equalTo: margins.topAnchor)
+        
+        let topConstraint = scrollView.topAnchor.constraint(equalTo: self.topAnchor)
         topConstraint.priority = .init(rawValue: 999.0)
         topConstraint.isActive = true
         
-        stackView.bottomAnchor.constraint(equalTo: margins.bottomAnchor).isActive = true
-        stackView.leadingAnchor.constraint(equalTo: margins.leadingAnchor).isActive = true
-        let trailingConstraint = stackView.trailingAnchor.constraint(equalTo: margins.trailingAnchor)
+        scrollView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        scrollView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+        
+        let trailingConstraint = scrollView.trailingAnchor.constraint(equalTo: self.trailingAnchor)
         trailingConstraint.priority = .init(rawValue: 999.0)
         trailingConstraint.isActive = true
         
@@ -113,18 +114,15 @@ class WalkSlider: UIView {
         scrollView.showsVerticalScrollIndicator = false
         scrollView.delegate = self
 
-        // aadd scrollview to stackview
-        stackView.addArrangedSubview(scrollView)
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-
         // add container view to scrollview
         containerView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.addSubview(containerView)
-        containerView.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
-        containerView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
-        containerView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
-        containerView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true
-        containerView.heightAnchor.constraint(equalTo: scrollView.frameLayoutGuide.heightAnchor).isActive = true
+        let contentLayoutGuide = scrollView.contentLayoutGuide
+        containerView.topAnchor.constraint(equalTo: margins.topAnchor).isActive = true
+//        containerView.bottomAnchor.constraint(equalTo: contentLayoutGuide.bottomAnchor).isActive = true
+        containerView.leadingAnchor.constraint(equalTo: contentLayoutGuide.leadingAnchor).isActive = true
+        containerView.trailingAnchor.constraint(equalTo: contentLayoutGuide.trailingAnchor).isActive = true
+//        containerView.heightAnchor.constraint(equalTo: scrollView.frameLayoutGuide.heightAnchor).isActive = true
         
         // Add views to container view
         addMileStones(views: milestones, to: containerView)
@@ -137,23 +135,44 @@ class WalkSlider: UIView {
     private func addMileStones(views: [UIView], to container:UIView) {
         var previousView: UIView!
         for (index, view) in views.enumerated() {
-            view.translatesAutoresizingMaskIntoConstraints = false
-            container.addSubview(view)
-            view.topAnchor.constraint(equalTo: container.topAnchor).isActive = true
-            view.bottomAnchor.constraint(equalTo: container.bottomAnchor).isActive = true
-            view.widthAnchor.constraint(equalTo: self.stackView.widthAnchor).isActive = true
+            var walkView = view
+            var bgView: WalkBGView?
+            
+            // If its a WalkBGView obtain corresponding WalkView instance
+            // and add it to the container.
+            if let bg = view as? WalkBGView {
+                bgView = bg
+                if let walk = bg.walkView {
+                    walkView = walk
+                }
+            }
+            
+            walkView.translatesAutoresizingMaskIntoConstraints = false
+            container.addSubview(walkView)
+            walkView.topAnchor.constraint(equalTo: container.topAnchor).isActive = true
+            walkView.bottomAnchor.constraint(equalTo: container.bottomAnchor).isActive = true
+            walkView.widthAnchor.constraint(equalTo: self.scrollView.widthAnchor).isActive = true
             
             if previousView != nil {
-                view.leadingAnchor.constraint(equalTo: previousView.trailingAnchor).isActive = true
+                walkView.leadingAnchor.constraint(equalTo: previousView.trailingAnchor).isActive = true
             }
             else {
-                view.leadingAnchor.constraint(equalTo: container.leadingAnchor).isActive = true
+                walkView.leadingAnchor.constraint(equalTo: container.leadingAnchor).isActive = true
             }
             
             if index == (views.count - 1) {
-                view.trailingAnchor.constraint(equalTo: container.trailingAnchor).isActive = true
+                walkView.trailingAnchor.constraint(equalTo: container.trailingAnchor).isActive = true
             }
-            previousView = view
+            
+            if let bgView = bgView {
+                bgView.translatesAutoresizingMaskIntoConstraints = false
+                container.insertSubview(bgView, belowSubview: walkView)
+                bgView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+                bgView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+                bgView.leadingAnchor.constraint(equalTo: walkView.leadingAnchor).isActive = true
+                bgView.trailingAnchor.constraint(equalTo: walkView.trailingAnchor).isActive = true
+            }
+            previousView = walkView
         }
     }
     
@@ -167,11 +186,27 @@ class WalkSlider: UIView {
         
         skipButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
         skipButton.titleLabel?.adjustsFontForContentSizeCategory = true
-        skipButton.contentEdgeInsets = UIEdgeInsets(top: 20, left: 10, bottom: 20, right: 10)
 
         skipButton.addTarget(self, action: #selector(skipButtonTapped(sender:)), for: .touchUpInside)
         
-        stackView.addArrangedSubview(skipButton)
+        skipButton.translatesAutoresizingMaskIntoConstraints = false
+        // Adding the button on scrollView so that it stays
+        // on the screen while scrolling.
+        scrollView.addSubview(skipButton)
+        NSLayoutConstraint.activate([
+            // Centering the button wrt to scrollview's frame in the horizontal axis.
+            skipButton.centerXAnchor.constraint(equalTo: scrollView.frameLayoutGuide.centerXAnchor),
+            // Attaching the bottom anchor of containerView to with proper spacing.
+//            skipButton.topAnchor.constraint(equalTo: containerView.bottomAnchor, constant: 20.0),
+            skipButton.topAnchor.constraint(greaterThanOrEqualTo: containerView.bottomAnchor, constant: 20.0),
+            // Attaching the bottom anchor of the button with slider's layout margin's bottom anchor
+            // so that directionalLayoutMargins apply.
+            skipButton.bottomAnchor.constraint(equalTo: self.layoutMarginsGuide.bottomAnchor)
+        ])
+        
+        // Setting the content-hugging priority to high so that the
+        // button is not expanded vertically.
+        skipButton.setContentHuggingPriority(.defaultHigh, for: .vertical)
     }
     
     /**
@@ -179,7 +214,6 @@ class WalkSlider: UIView {
      */
     func addPageControl() {
         pageControl.numberOfPages = milestones.count
-        stackView.addArrangedSubview(pageControl)
     }
 
     /**

@@ -143,15 +143,16 @@ class WalkView: UIView {
         
         // Configure stackview
         stackView.alignment = .center
-        stackView.distribution = .equalCentering
+        stackView.distribution = .equalSpacing
         stackView.isLayoutMarginsRelativeArrangement = true
         stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.setContentHuggingPriority(.defaultHigh, for: .vertical)
         
         // add stackview to superview
         self.addSubview(stackView)
         stackView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         stackView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
         stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
-        stackView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        stackView.bottomAnchor.constraint(lessThanOrEqualTo: self.bottomAnchor, constant: 10.0).isActive = true
     }
 }
