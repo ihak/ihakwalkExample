@@ -19,7 +19,7 @@ class WalkBGView: UIView {
     }
     
     private var imageView: UIImageView?
-    private var walkView: WalkView?
+    private(set) var walkView: WalkView?
     private var leadingConstraint: NSLayoutConstraint!
     
     var type: BackgroundType = .normal
@@ -61,6 +61,10 @@ class WalkBGView: UIView {
         }
     }
     
+    /**
+     *  Initialises the object with the provided image, optional WalkView and
+     *  background type.
+     */
     init(image: UIImage? = nil, walkView: WalkView? = nil, type: BackgroundType = .normal) {
         if let image = image {
             self.imageView = UIImageView(image: image)
@@ -78,6 +82,10 @@ class WalkBGView: UIView {
         setup()
     }
     
+    /**
+     *  Initiales the object with an image created with provided color
+     *  and optional WalkView object.
+     */
     init(color: UIColor, walkView: WalkView? = nil) {
         self.imageView = UIImageView(image: color.image().resizableImage(withCapInsets: .zero))
         self.walkView = walkView
@@ -110,17 +118,8 @@ class WalkBGView: UIView {
                 imageView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
             }
         }
-        
-        if let walkView = self.walkView {
-            self.addSubview(walkView)
-            walkView.translatesAutoresizingMaskIntoConstraints = false
-            
-            walkView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-            walkView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-            walkView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-            walkView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
-        }
     }
+    
     /**
      *  Adds blur to the background.
      */
@@ -140,6 +139,20 @@ class WalkBGView: UIView {
         blur.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         blur.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
         blur.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+    }
+    
+    /**
+     *  Adds overlay to the background.
+     */
+    public func addOverlay(color: UIColor = UIColor(white: 0.1, alpha: 0.5)) {
+        let view = UIView()
+        view.backgroundColor = color
+        view.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(view)
+        view.topAnchor.constraint(equalTo: imageView!.topAnchor).isActive = true
+        view.bottomAnchor.constraint(equalTo: imageView!.bottomAnchor).isActive = true
+        view.leadingAnchor.constraint(equalTo: imageView!.leadingAnchor).isActive = true
+        view.trailingAnchor.constraint(equalTo: imageView!.trailingAnchor).isActive = true
     }
 }
 

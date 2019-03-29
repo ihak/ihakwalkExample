@@ -57,6 +57,8 @@ class WalkView: UIView {
         
         self.configuration = configuration
         super.init(frame: .zero)
+        
+        directionalLayoutMargins = NSDirectionalEdgeInsets(top: 20.0, leading: 20.0, bottom: 20.0, trailing: 20.0)
         setup()
         configure()
     }
@@ -143,15 +145,17 @@ class WalkView: UIView {
         
         // Configure stackview
         stackView.alignment = .center
-        stackView.distribution = .equalCentering
+        stackView.distribution = .equalSpacing
         stackView.isLayoutMarginsRelativeArrangement = true
         stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.setContentHuggingPriority(.defaultHigh, for: .vertical)
         
         // add stackview to superview
         self.addSubview(stackView)
-        stackView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        stackView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-        stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
-        stackView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        let margins = self.layoutMarginsGuide
+        stackView.topAnchor.constraint(equalTo: margins.topAnchor).isActive = true
+        stackView.leadingAnchor.constraint(equalTo: margins.leadingAnchor).isActive = true
+        stackView.trailingAnchor.constraint(equalTo: margins.trailingAnchor).isActive = true
+        stackView.bottomAnchor.constraint(lessThanOrEqualTo: margins.bottomAnchor, constant: 10.0).isActive = true
     }
 }
