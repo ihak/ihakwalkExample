@@ -141,6 +141,7 @@ class ViewController: UIViewController {
         let walk3 = WalkView(title: "Title 3", descriptionText: "Description for title 3.", image: UIImage(named: "title2"), sequence: [.image, .title, .description])
         
         let background = WalkBGView(image: UIImage(named: "2"))
+        background.addOverlay()
         
         let walkslider = WalkSlider(backgroundView: background, milestones: [walk1, walk2, walk3])
         
