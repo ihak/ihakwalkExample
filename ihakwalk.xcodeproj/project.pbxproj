@@ -18,6 +18,7 @@
 		E43C90EC223FAE2A00898DF2 /* WalkBGView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43C90EB223FAE2A00898DF2 /* WalkBGView.swift */; };
 		E43C90EE2240B8D200898DF2 /* WalkSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43C90ED2240B8D200898DF2 /* WalkSlider.swift */; };
 		E43C90F122449D7300898DF2 /* UIColor+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43C90F022449D7200898DF2 /* UIColor+Image.swift */; };
+		E4D54D61224E4CE700D06634 /* ProductSliderVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4D54D60224E4CE600D06634 /* ProductSliderVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,7 @@
 		E43C90EB223FAE2A00898DF2 /* WalkBGView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkBGView.swift; sourceTree = "<group>"; };
 		E43C90ED2240B8D200898DF2 /* WalkSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkSlider.swift; sourceTree = "<group>"; };
 		E43C90F022449D7200898DF2 /* UIColor+Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Image.swift"; sourceTree = "<group>"; };
+		E4D54D60224E4CE600D06634 /* ProductSliderVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductSliderVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +100,7 @@
 				E43C90E9223BB38D00898DF2 /* WalkView.swift */,
 				E43C90EB223FAE2A00898DF2 /* WalkBGView.swift */,
 				E43C90ED2240B8D200898DF2 /* WalkSlider.swift */,
+				E4D54D60224E4CE600D06634 /* ProductSliderVC.swift */,
 			);
 			path = ihakwalk;
 			sourceTree = "<group>";
@@ -225,6 +228,7 @@
 				E43C90C8223A7BF500898DF2 /* AppDelegate.swift in Sources */,
 				E43C90E8223A7CD300898DF2 /* WalkVC.swift in Sources */,
 				E43C90EE2240B8D200898DF2 /* WalkSlider.swift in Sources */,
+				E4D54D61224E4CE700D06634 /* ProductSliderVC.swift in Sources */,
 				E43C90EC223FAE2A00898DF2 /* WalkBGView.swift in Sources */,
 				E43C90EA223BB38D00898DF2 /* WalkView.swift in Sources */,
 			);
