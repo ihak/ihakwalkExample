@@ -27,6 +27,8 @@ class WalkSlider: UIView {
     private lazy var containerView = UIView()
     private lazy var backgroundContainerView = UIView()
     
+    private var skipButtonTopConstraint: NSLayoutConstraint?
+    
     private var backgroundView: WalkBGView?
     private var milestones = [UIView]()
 
@@ -93,8 +95,6 @@ class WalkSlider: UIView {
         // Add scrollview to superview
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(scrollView)
-        
-        let margins = self.layoutMarginsGuide
         
         let topConstraint = scrollView.topAnchor.constraint(equalTo: self.topAnchor)
         topConstraint.priority = .init(rawValue: 999.0)
@@ -197,8 +197,7 @@ class WalkSlider: UIView {
         NSLayoutConstraint.activate([
             // Centering the button wrt to scrollview's frame in the horizontal axis.
             skipButton.centerXAnchor.constraint(equalTo: scrollView.frameLayoutGuide.centerXAnchor),
-            // Attaching the bottom anchor of containerView to with proper spacing.
-//            skipButton.topAnchor.constraint(equalTo: containerView.bottomAnchor, constant: 20.0),
+            // Attaching the bottom anchor of containerView to the button with proper spacing.
             skipButton.topAnchor.constraint(greaterThanOrEqualTo: containerView.bottomAnchor, constant: 20.0),
             // Attaching the bottom anchor of the button with slider's layout margin's bottom anchor
             // so that directionalLayoutMargins apply.
@@ -208,6 +207,14 @@ class WalkSlider: UIView {
         // Setting the content-hugging priority to high so that the
         // button is not expanded vertically.
         skipButton.setContentHuggingPriority(.defaultHigh, for: .vertical)
+        
+        // If pageControl is already added
+        // remove and add it again to adjust
+        // the constraints.
+        if let _ = pageControl.superview {
+            pageControl.removeFromSuperview()
+            addPageControl()
+        }
     }
     
     /**
@@ -215,6 +222,18 @@ class WalkSlider: UIView {
      */
     func addPageControl() {
         pageControl.numberOfPages = milestones.count
+        
+        pageControl.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.addSubview(pageControl)
+        
+        pageControl.centerXAnchor.constraint(equalTo: scrollView.frameLayoutGuide.centerXAnchor).isActive = true
+        
+        if let _ = skipButton.superview {
+            pageControl.bottomAnchor.constraint(equalTo: skipButton.topAnchor, constant: 0.0).isActive = true
+        }
+        else {
+            pageControl.bottomAnchor.constraint(equalTo: self.layoutMarginsGuide.bottomAnchor).isActive = true
+        }
     }
 
     /**

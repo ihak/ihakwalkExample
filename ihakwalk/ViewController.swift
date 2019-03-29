@@ -13,7 +13,7 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    let examples = ["ABCIntro Walk", "Surfboard Walk", "Fixed BG Walk", "Different BG Walk", "Fixed BG Paralax Walk","Different BG Paralax Walk", "Fixed BG Blur Walk", "Different BG Blur Walk"]
+    let examples = ["ABCIntro Walk", "Surfboard Walk", "GHWalkThrough", "Fixed BG Walk", "Different BG Walk", "Fixed BG Paralax Walk","Different BG Paralax Walk", "Fixed BG Blur Walk", "Different BG Blur Walk"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,8 +70,8 @@ class ViewController: UIViewController {
         let walkslider = WalkSlider(backgroundView: bgView, milestones: [walk1, walk2, walk3, walk4, walk5])
 //        walkslider.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 40.0, leading: 16.0, bottom: 0.0, trailing: 16.0)
         
-        walkslider.addPageControl()
         walkslider.addSkipButton()
+        walkslider.addPageControl()
         
         let walkVC = WalkVC(walkSlider: walkslider)
         let navigationController = UINavigationController(rootViewController: walkVC)
@@ -107,9 +107,10 @@ class ViewController: UIViewController {
         let walkSlider = WalkSlider(backgroundView: backgroundView, milestones: [walk1, walk2, walk3, walk4])
         walkSlider.directionalLayoutMargins = .init(top: 20.0, leading: 30.0, bottom: 0.0, trailing: 30.0)
 
-        walkSlider.addPageControl()
         walkSlider.addSkipButton()
-        
+
+        walkSlider.addPageControl()
+
         walkSlider.configureSkipButton { (button) in
             button.backgroundColor = UIColor(red: 0.129, green: 0.588, blue: 0.953, alpha: 1.0)
             button.setTitle("Let's Go", for: .normal)
@@ -125,9 +126,71 @@ class ViewController: UIViewController {
         
         let walkVC = WalkVC(walkSlider: walkSlider)
         let navigationController = UINavigationController(rootViewController: walkVC)
-        navigationController.isNavigationBarHidden = false
+        navigationController.isNavigationBarHidden = true
         self.present(navigationController, animated: true
             , completion: nil)
+    }
+    
+    /**
+     *  Inspiration 3: GHWalkThrough
+     */
+    
+    func addGHWalkThroughWalk() {
+        let walk1 = WalkView(title: "This is page 1", descriptionText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", image: UIImage(named: "ghw-title-1"), sequence: [.image, .title, .description]){ (walkView, title, description, imageView) in
+            title?.font = UIFont.boldSystemFont(ofSize: 25)
+            
+            walkView.addCustomSpacing(spacing: 20.0, after: imageView!)
+            walkView.addCustomSpacing(spacing: 15.0, after: title!)
+
+        }
+        
+        let milestone1 = WalkBGView(image: UIImage(named: "14"), walkView: walk1)
+        
+        let walk2 = WalkView(title: "This is page 2", descriptionText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", image: UIImage(named: "ghw-title-2"), sequence: [.image, .title, .description]){ (walkView, title, description, imageView) in
+            title?.font = UIFont.boldSystemFont(ofSize: 25)
+            
+            walkView.addCustomSpacing(spacing: 20.0, after: imageView!)
+            walkView.addCustomSpacing(spacing: 15.0, after: title!)
+        }
+        
+        let milestone2 = WalkBGView(image: UIImage(named: "11"), walkView: walk2)
+        
+        let walk3 = WalkView(title: "This is page 3", descriptionText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", image: UIImage(named: "ghw-title-3"), sequence: [.image, .title, .description]){ (walkView, title, description, imageView) in
+            title?.font = UIFont.boldSystemFont(ofSize: 25)
+            
+            walkView.addCustomSpacing(spacing: 20.0, after: imageView!)
+            walkView.addCustomSpacing(spacing: 15.0, after: title!)
+        }
+        
+        let milestone3 = WalkBGView(image: UIImage(named: "12"), walkView: walk3)
+        
+        let walk4 = WalkView(title: "This is page 4", descriptionText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", image: UIImage(named: "ghw-title-4"), sequence: [.image, .title, .description]){ (walkView, title, description, imageView) in
+            title?.font = UIFont.boldSystemFont(ofSize: 25)
+            
+            walkView.addCustomSpacing(spacing: 20.0, after: imageView!)
+            walkView.addCustomSpacing(spacing: 15.0, after: title!)
+        }
+        
+        let milestone4 = WalkBGView(image: UIImage(named: "13"), walkView: walk4)
+        
+        let walk5 = WalkView(title: "This is page 5", descriptionText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", image: UIImage(named: "ghw-title-5"), sequence: [.image, .title, .description]){ (walkView, title, description, imageView) in
+            title?.font = UIFont.boldSystemFont(ofSize: 25)
+            
+            walkView.addCustomSpacing(spacing: 20.0, after: imageView!)
+            walkView.addCustomSpacing(spacing: 15.0, after: title!)
+        }
+        
+        let milestone5 = WalkBGView(image: UIImage(named: "15"), walkView: walk5)
+        
+        let walkSlider = WalkSlider(milestones: [milestone1, milestone2, milestone3, milestone4, milestone5])
+        walkSlider.backgroundColor = .gray
+        walkSlider.addSkipButton()
+        walkSlider.addPageControl()
+        
+        let walkVC = WalkVC(walkSlider: walkSlider)
+        let navigationController = UINavigationController(rootViewController: walkVC)
+        navigationController.isNavigationBarHidden = true
+        self.present(navigationController, animated: true, completion: nil)
     }
     
     /**
@@ -145,8 +208,8 @@ class ViewController: UIViewController {
         
         let walkslider = WalkSlider(backgroundView: background, milestones: [walk1, walk2, walk3])
         
-        walkslider.addPageControl()
         walkslider.addSkipButton()
+        walkslider.addPageControl()
         
         let walkVC = WalkVC(walkSlider: walkslider)
         let navigationController = UINavigationController(rootViewController: walkVC)
@@ -298,6 +361,8 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             addSurfboardSliderVC()
         case "ABCIntro Walk":
             addABCIntroView()
+        case "GHWalkThrough":
+            addGHWalkThroughWalk()
         case "Fixed BG Walk":
             addFixedBackgroundWalk()
         case "Different BG Walk":
