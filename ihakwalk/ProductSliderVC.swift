@@ -37,13 +37,25 @@ class ProductSliderVC: UIViewController {
         
         let productsImage = UIImageView(image: UIImage(named: "products_placeholder"))
         productsImage.translatesAutoresizingMaskIntoConstraints = false
-        productsImage.contentMode = .scaleAspectFill
+        productsImage.contentMode = .scaleToFill
 
         self.view.addSubview(productsImage)
         productsImage.topAnchor.constraint(equalTo: bannerView.bottomAnchor).isActive = true
         productsImage.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
         productsImage.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
         productsImage.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+        
+        let dismissButton = UIButton(type: .custom)
+        dismissButton.setTitle("", for: .normal)
+        dismissButton.addTarget(self, action: #selector(dismissButtonTapped(_:)), for: .touchUpInside)
+        
+        dismissButton.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(dismissButton)
+        
+        dismissButton.topAnchor.constraint(equalTo: productsImage.topAnchor).isActive = true
+        dismissButton.bottomAnchor.constraint(equalTo: productsImage.bottomAnchor).isActive = true
+        dismissButton.leadingAnchor.constraint(equalTo: productsImage.leadingAnchor).isActive = true
+        dismissButton.trailingAnchor.constraint(equalTo: productsImage.trailingAnchor).isActive = true
         
         createBannerSlider(in: bannerView)
     }
@@ -67,15 +79,8 @@ class ProductSliderVC: UIViewController {
         walkVC.view.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
         walkVC.view.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    @objc func dismissButtonTapped(_ sender: UIButton) {
+        self.navigationController?.dismiss(animated: true, completion: nil)
     }
-    */
-
 }
