@@ -24,8 +24,49 @@ class ProductSliderVC: UIViewController {
         headerImageView.heightAnchor.constraint(equalToConstant: 64.0).isActive = true
         headerImageView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
         
+        let bannerView = UIView()
+        bannerView.backgroundColor = UIColor(red: 214.0/256.0, green: 214.0/256.0, blue: 214.0/256.0, alpha: 1.0)
+        bannerView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(bannerView)
+        
+        bannerView.topAnchor.constraint(equalTo: headerImageView.bottomAnchor).isActive = true
+        bannerView.widthAnchor.constraint(equalTo: bannerView.heightAnchor, multiplier: 2.0).isActive = true
+        bannerView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
+        bannerView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+        
+        
+        let productsImage = UIImageView(image: UIImage(named: "products_placeholder"))
+        productsImage.translatesAutoresizingMaskIntoConstraints = false
+        productsImage.contentMode = .scaleAspectFill
+
+        self.view.addSubview(productsImage)
+        productsImage.topAnchor.constraint(equalTo: bannerView.bottomAnchor).isActive = true
+        productsImage.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+        productsImage.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
+        productsImage.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+        
+        createBannerSlider(in: bannerView)
     }
     
+    func createBannerSlider(in containerView: UIView) {
+        let bg1 = WalkBGView(image: UIImage(named: "banner_1"))
+        let bg2 = WalkBGView(image: UIImage(named: "banner_2"))
+        let bg3 = WalkBGView(image: UIImage(named: "banner_3"))
+        let bg4 = WalkBGView(image: UIImage(named: "banner_4"))
+        let bg5 = WalkBGView(image: UIImage(named: "banner_5"))
+        
+        let walkSlider = WalkSlider(milestones: [bg1, bg2, bg3, bg4, bg5])
+        let walkVC = WalkVC(walkSlider: walkSlider)
+        walkSlider.addPageControl()
+        self.addChild(walkVC)
+        walkVC.view.translatesAutoresizingMaskIntoConstraints = false
+        containerView.addSubview(walkVC.view)
+        
+        walkVC.view.topAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
+        walkVC.view.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
+        walkVC.view.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
+        walkVC.view.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
+    }
 
     /*
     // MARK: - Navigation
