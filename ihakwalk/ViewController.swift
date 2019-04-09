@@ -214,6 +214,13 @@ class ViewController: UIViewController {
         let walkVC = WalkVC(walkSlider: walkslider)
         let navigationController = UINavigationController(rootViewController: walkVC)
         navigationController.isNavigationBarHidden = true
+        
+        walk1.configureTap { (walkView) in
+            let alertVC = UIAlertController(title: "Title 1", message: "View 1 tapped.", preferredStyle: .alert)
+            alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+            navigationController.present(alertVC, animated: true, completion: nil)
+        }
+
         self.present(navigationController, animated: true
             , completion: nil)
     }

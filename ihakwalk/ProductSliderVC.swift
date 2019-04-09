@@ -65,9 +65,7 @@ class ProductSliderVC: UIViewController {
         
         bg1.configureTap { (view) in
             let alertVC = UIAlertController(title: "Banner 1", message: "Banner 1 tapped.", preferredStyle: .alert)
-            let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-            alertVC.addAction(action)
-            
+            alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
             self.present(alertVC, animated: true, completion: nil)
         }
         

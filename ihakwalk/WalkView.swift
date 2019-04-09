@@ -26,6 +26,9 @@ class WalkView: UIView {
     private var sequence: [DisplayItem]
     
     typealias Configuration = (_ walkView: WalkView, _ title: UILabel?,_ description: UILabel?,_ image: UIImageView?) -> Void
+    typealias TapHandler = ((_ bgView: WalkView) -> Void)
+    
+    private var tapHandler: TapHandler?
     
     enum DisplayItem {
         case title, description, image
@@ -157,16 +160,17 @@ class WalkView: UIView {
         stackView.leadingAnchor.constraint(equalTo: margins.leadingAnchor).isActive = true
         stackView.trailingAnchor.constraint(equalTo: margins.trailingAnchor).isActive = true
         stackView.bottomAnchor.constraint(lessThanOrEqualTo: margins.bottomAnchor, constant: 10.0).isActive = true
-        
-        self.addButton()
     }
     
-    func addButton() {
+    func configureTap(_ block:TapHandler?) {
+        self.tapHandler = block
+        
         let gesture = UITapGestureRecognizer(target: self, action: #selector(walkViewTapped))
         self.addGestureRecognizer(gesture)
     }
     
     @objc func walkViewTapped() {
         print("View tapped!!!")
+        self.tapHandler?(self)
     }
 }
