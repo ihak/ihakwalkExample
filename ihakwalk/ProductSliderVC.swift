@@ -62,6 +62,15 @@ class ProductSliderVC: UIViewController {
     
     func createBannerSlider(in containerView: UIView) {
         let bg1 = WalkBGView(image: UIImage(named: "banner_1"))
+        
+        bg1.configureTap { (view) in
+            let alertVC = UIAlertController(title: "Banner 1", message: "Banner 1 tapped.", preferredStyle: .alert)
+            let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+            alertVC.addAction(action)
+            
+            self.present(alertVC, animated: true, completion: nil)
+        }
+        
         let bg2 = WalkBGView(image: UIImage(named: "banner_2"))
         let bg3 = WalkBGView(image: UIImage(named: "banner_3"))
         let bg4 = WalkBGView(image: UIImage(named: "banner_4"))

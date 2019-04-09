@@ -157,5 +157,16 @@ class WalkView: UIView {
         stackView.leadingAnchor.constraint(equalTo: margins.leadingAnchor).isActive = true
         stackView.trailingAnchor.constraint(equalTo: margins.trailingAnchor).isActive = true
         stackView.bottomAnchor.constraint(lessThanOrEqualTo: margins.bottomAnchor, constant: 10.0).isActive = true
+        
+        self.addButton()
+    }
+    
+    func addButton() {
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(walkViewTapped))
+        self.addGestureRecognizer(gesture)
+    }
+    
+    @objc func walkViewTapped() {
+        print("View tapped!!!")
     }
 }
