@@ -32,14 +32,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		E43C90C4223A7BF500898DF2 /* ihakwalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ihakwalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E43C90C4223A7BF500898DF2 /* ihakwalkExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ihakwalkExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E43C90C7223A7BF500898DF2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E43C90C9223A7BF500898DF2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		E43C90CC223A7BF500898DF2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E43C90CE223A7BF700898DF2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E43C90D1223A7BF700898DF2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E43C90D3223A7BF700898DF2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E43C90D8223A7BF700898DF2 /* ihakwalkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ihakwalkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E43C90D8223A7BF700898DF2 /* ihakwalkExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ihakwalkExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E43C90DC223A7BF700898DF2 /* ihakwalkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ihakwalkTests.swift; sourceTree = "<group>"; };
 		E43C90DE223A7BF700898DF2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E43C90E7223A7CD300898DF2 /* WalkVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkVC.swift; sourceTree = "<group>"; };
@@ -80,8 +80,8 @@
 		E43C90C5223A7BF500898DF2 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				E43C90C4223A7BF500898DF2 /* ihakwalk.app */,
-				E43C90D8223A7BF700898DF2 /* ihakwalkTests.xctest */,
+				E43C90C4223A7BF500898DF2 /* ihakwalkExample.app */,
+				E43C90D8223A7BF700898DF2 /* ihakwalkExampleTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -125,9 +125,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		E43C90C3223A7BF500898DF2 /* ihakwalk */ = {
+		E43C90C3223A7BF500898DF2 /* ihakwalkExample */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E43C90E1223A7BF700898DF2 /* Build configuration list for PBXNativeTarget "ihakwalk" */;
+			buildConfigurationList = E43C90E1223A7BF700898DF2 /* Build configuration list for PBXNativeTarget "ihakwalkExample" */;
 			buildPhases = (
 				E43C90C0223A7BF500898DF2 /* Sources */,
 				E43C90C1223A7BF500898DF2 /* Frameworks */,
@@ -137,14 +137,14 @@
 			);
 			dependencies = (
 			);
-			name = ihakwalk;
+			name = ihakwalkExample;
 			productName = ihakwalk;
-			productReference = E43C90C4223A7BF500898DF2 /* ihakwalk.app */;
+			productReference = E43C90C4223A7BF500898DF2 /* ihakwalkExample.app */;
 			productType = "com.apple.product-type.application";
 		};
-		E43C90D7223A7BF700898DF2 /* ihakwalkTests */ = {
+		E43C90D7223A7BF700898DF2 /* ihakwalkExampleTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E43C90E4223A7BF700898DF2 /* Build configuration list for PBXNativeTarget "ihakwalkTests" */;
+			buildConfigurationList = E43C90E4223A7BF700898DF2 /* Build configuration list for PBXNativeTarget "ihakwalkExampleTests" */;
 			buildPhases = (
 				E43C90D4223A7BF700898DF2 /* Sources */,
 				E43C90D5223A7BF700898DF2 /* Frameworks */,
@@ -155,9 +155,9 @@
 			dependencies = (
 				E43C90DA223A7BF700898DF2 /* PBXTargetDependency */,
 			);
-			name = ihakwalkTests;
+			name = ihakwalkExampleTests;
 			productName = ihakwalkTests;
-			productReference = E43C90D8223A7BF700898DF2 /* ihakwalkTests.xctest */;
+			productReference = E43C90D8223A7BF700898DF2 /* ihakwalkExampleTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -179,7 +179,7 @@
 					};
 				};
 			};
-			buildConfigurationList = E43C90BF223A7BF500898DF2 /* Build configuration list for PBXProject "ihakwalk" */;
+			buildConfigurationList = E43C90BF223A7BF500898DF2 /* Build configuration list for PBXProject "ihakwalkExample" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -192,8 +192,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				E43C90C3223A7BF500898DF2 /* ihakwalk */,
-				E43C90D7223A7BF700898DF2 /* ihakwalkTests */,
+				E43C90C3223A7BF500898DF2 /* ihakwalkExample */,
+				E43C90D7223A7BF700898DF2 /* ihakwalkExampleTests */,
 			);
 		};
 /* End PBXProject section */
@@ -247,7 +247,7 @@
 /* Begin PBXTargetDependency section */
 		E43C90DA223A7BF700898DF2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = E43C90C3223A7BF500898DF2 /* ihakwalk */;
+			target = E43C90C3223A7BF500898DF2 /* ihakwalkExample */;
 			targetProxy = E43C90D9223A7BF700898DF2 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -447,7 +447,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ihakwalk.app/ihakwalk";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ihakwalkExample.app/ihakwalkExample";
 			};
 			name = Debug;
 		};
@@ -468,14 +468,14 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ihakwalk.app/ihakwalk";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ihakwalkExample.app/ihakwalkExample";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		E43C90BF223A7BF500898DF2 /* Build configuration list for PBXProject "ihakwalk" */ = {
+		E43C90BF223A7BF500898DF2 /* Build configuration list for PBXProject "ihakwalkExample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E43C90DF223A7BF700898DF2 /* Debug */,
@@ -484,7 +484,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E43C90E1223A7BF700898DF2 /* Build configuration list for PBXNativeTarget "ihakwalk" */ = {
+		E43C90E1223A7BF700898DF2 /* Build configuration list for PBXNativeTarget "ihakwalkExample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E43C90E2223A7BF700898DF2 /* Debug */,
@@ -493,7 +493,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E43C90E4223A7BF700898DF2 /* Build configuration list for PBXNativeTarget "ihakwalkTests" */ = {
+		E43C90E4223A7BF700898DF2 /* Build configuration list for PBXNativeTarget "ihakwalkExampleTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E43C90E5223A7BF700898DF2 /* Debug */,

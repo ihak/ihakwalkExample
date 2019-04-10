@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "E43C90C3223A7BF500898DF2"
-               BuildableName = "ihakwalk.app"
-               BlueprintName = "ihakwalk"
-               ReferencedContainer = "container:ihakwalk.xcodeproj">
+               BuildableName = "ihakwalkExample.app"
+               BlueprintName = "ihakwalkExample"
+               ReferencedContainer = "container:ihakwalkExample.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "E43C90D7223A7BF700898DF2"
-               BuildableName = "ihakwalkTests.xctest"
-               BlueprintName = "ihakwalkTests"
-               ReferencedContainer = "container:ihakwalk.xcodeproj">
+               BuildableName = "ihakwalkExampleTests.xctest"
+               BlueprintName = "ihakwalkExampleTests"
+               ReferencedContainer = "container:ihakwalkExample.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -43,9 +43,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E43C90C3223A7BF500898DF2"
-            BuildableName = "ihakwalk.app"
-            BlueprintName = "ihakwalk"
-            ReferencedContainer = "container:ihakwalk.xcodeproj">
+            BuildableName = "ihakwalkExample.app"
+            BlueprintName = "ihakwalkExample"
+            ReferencedContainer = "container:ihakwalkExample.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -66,9 +66,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E43C90C3223A7BF500898DF2"
-            BuildableName = "ihakwalk.app"
-            BlueprintName = "ihakwalk"
-            ReferencedContainer = "container:ihakwalk.xcodeproj">
+            BuildableName = "ihakwalkExample.app"
+            BlueprintName = "ihakwalkExample"
+            ReferencedContainer = "container:ihakwalkExample.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -85,9 +85,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E43C90C3223A7BF500898DF2"
-            BuildableName = "ihakwalk.app"
-            BlueprintName = "ihakwalk"
-            ReferencedContainer = "container:ihakwalk.xcodeproj">
+            BuildableName = "ihakwalkExample.app"
+            BlueprintName = "ihakwalkExample"
+            ReferencedContainer = "container:ihakwalkExample.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
