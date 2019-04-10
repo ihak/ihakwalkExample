@@ -13,7 +13,7 @@ import UIKit
  *  as well as for the whole component. It supports an image or a
  *  color. Also provides paralax effect and blur.
  */
-class WalkBGView: UIView {
+public class WalkBGView: UIView {
     enum BackgroundType {
         case normal, paralax
     }
@@ -21,6 +21,8 @@ class WalkBGView: UIView {
     private var imageView: UIImageView?
     private(set) var walkView: WalkView?
     private var leadingConstraint: NSLayoutConstraint!
+    
+    private var tapHandler: ((_ bgView: WalkBGView) -> Void)?
     
     var type: BackgroundType = .normal
     
@@ -117,7 +119,7 @@ class WalkBGView: UIView {
             if type == .normal {
                 imageView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
             }
-        }
+        }        
     }
     
     /**
@@ -153,6 +155,18 @@ class WalkBGView: UIView {
         view.bottomAnchor.constraint(equalTo: imageView!.bottomAnchor).isActive = true
         view.leadingAnchor.constraint(equalTo: imageView!.leadingAnchor).isActive = true
         view.trailingAnchor.constraint(equalTo: imageView!.trailingAnchor).isActive = true
+    }
+    
+    func configureTap(_ block: @escaping ((_ bgView: WalkBGView) -> Void)) {
+        self.tapHandler = block
+        
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(walkViewTapped))
+        self.addGestureRecognizer(gesture)
+    }
+    
+    @objc private func walkViewTapped() {
+        print("View tapped!!!")
+        self.tapHandler?(self)
     }
 }
 

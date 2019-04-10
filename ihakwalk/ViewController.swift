@@ -13,7 +13,7 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    let examples = ["ABCIntro Walk", "Surfboard Walk", "GHWalkThrough", "Fixed BG Walk", "Different BG Walk", "Fixed BG Paralax Walk","Different BG Paralax Walk", "Fixed BG Blur Walk", "Different BG Blur Walk"]
+    let examples = ["ABCIntro Walk", "Surfboard Walk", "GHWalkThrough", "Fixed BG Walk", "Different BG Walk", "Fixed BG Paralax Walk","Different BG Paralax Walk", "Fixed BG Blur Walk", "Different BG Blur Walk", "Banner"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -214,6 +214,13 @@ class ViewController: UIViewController {
         let walkVC = WalkVC(walkSlider: walkslider)
         let navigationController = UINavigationController(rootViewController: walkVC)
         navigationController.isNavigationBarHidden = true
+        
+        walk1.configureTap { (walkView) in
+            let alertVC = UIAlertController(title: "Title 1", message: "View 1 tapped.", preferredStyle: .alert)
+            alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+            navigationController.present(alertVC, animated: true, completion: nil)
+        }
+
         self.present(navigationController, animated: true
             , completion: nil)
     }
@@ -338,6 +345,13 @@ class ViewController: UIViewController {
         self.present(navigationController, animated: true
             , completion: nil)
     }
+    
+    func addBanner() {
+        let productSlider = ProductSliderVC()
+        let navigationController = UINavigationController(rootViewController: productSlider)
+        navigationController.isNavigationBarHidden = true
+        self.present(navigationController, animated: true, completion: nil)
+    }
 }
 
 
@@ -375,6 +389,8 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             addFixedBGWithBlurWalk()
         case "Different BG Blur Walk":
             addDifferentBGWithBlurWalk()
+        case "Banner":
+            addBanner()
         default:
             addSurfboardSliderVC()
         }
