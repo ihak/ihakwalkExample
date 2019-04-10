@@ -13,12 +13,12 @@
 		E43C90CF223A7BF700898DF2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E43C90CE223A7BF700898DF2 /* Assets.xcassets */; };
 		E43C90D2223A7BF700898DF2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E43C90D0223A7BF700898DF2 /* LaunchScreen.storyboard */; };
 		E43C90DD223A7BF700898DF2 /* ihakwalkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43C90DC223A7BF700898DF2 /* ihakwalkTests.swift */; };
-		E43C90E8223A7CD300898DF2 /* WalkVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43C90E7223A7CD300898DF2 /* WalkVC.swift */; };
 		E43C90EA223BB38D00898DF2 /* WalkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43C90E9223BB38D00898DF2 /* WalkView.swift */; };
 		E43C90EC223FAE2A00898DF2 /* WalkBGView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43C90EB223FAE2A00898DF2 /* WalkBGView.swift */; };
 		E43C90EE2240B8D200898DF2 /* WalkSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43C90ED2240B8D200898DF2 /* WalkSlider.swift */; };
 		E43C90F122449D7300898DF2 /* UIColor+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43C90F022449D7200898DF2 /* UIColor+Image.swift */; };
 		E4D54D61224E4CE700D06634 /* ProductSliderVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4D54D60224E4CE600D06634 /* ProductSliderVC.swift */; };
+		E4FA5D06225E106A00A0B135 /* WalkVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43C90E7223A7CD300898DF2 /* WalkVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -226,11 +226,11 @@
 				E43C90CA223A7BF500898DF2 /* ViewController.swift in Sources */,
 				E43C90F122449D7300898DF2 /* UIColor+Image.swift in Sources */,
 				E43C90C8223A7BF500898DF2 /* AppDelegate.swift in Sources */,
-				E43C90E8223A7CD300898DF2 /* WalkVC.swift in Sources */,
 				E43C90EE2240B8D200898DF2 /* WalkSlider.swift in Sources */,
 				E4D54D61224E4CE700D06634 /* ProductSliderVC.swift in Sources */,
 				E43C90EC223FAE2A00898DF2 /* WalkBGView.swift in Sources */,
 				E43C90EA223BB38D00898DF2 /* WalkView.swift in Sources */,
+				E4FA5D06225E106A00A0B135 /* WalkVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
